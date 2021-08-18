@@ -7,3 +7,48 @@ Fuente: Open Sans
 BG 138CCE
 Header y Footer FFBA5C
 Botones 0362D6*/
+
+/*Resetear estilos del Body*/
+body {
+    margin: 0px 0px 0px 0px;
+  }
+ /*Header*/
+ #header{
+    background-color: #FFBA5C;
+    height: 4rem;
+ }
+ /*Navbar*/
+ .navLinks{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #000000;
+    float: right;
+    margin-right: 10%;
+    margin-top: 1%;
+    font-weight: bolder;
+ }
+ /*Título de Travel Exp*/
+ #titulo{
+    margin-left: 3%;
+    width: 9%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #000000;
+    position: relative;
+    top: 0.9rem;
+ }
+ /*Footer*/
+ #footer{
+    background-color: #FFBA5C;
+    height: 2.5rem;
+ }
+ /*Links del Footer*/
+ .footLinks{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: bolder;
+    margin-right: 10%;
+    margin-left: 5%;
+    margin-top: 1%;
+ }
