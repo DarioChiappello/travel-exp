@@ -1,6 +1,4 @@
-#navbar-text{
-    color: black;
-}
+
 
 /*
 Fuente: Open Sans
@@ -11,7 +9,15 @@ Botones 0362D6*/
 /*Resetear estilos del Body*/
 body {
     margin: 0px 0px 0px 0px;
+    background-color:#138CCE;
   }
+
+/*Index*/
+
+#ultPost{
+   background-color: #FFBA5C;
+}
+
  /*Header*/
  #header{
     background-color: #FFBA5C;
@@ -41,6 +47,8 @@ body {
  #footer{
     background-color: #FFBA5C;
     height: 2.5rem;
+    margin-top: 4%;
+    position:static;
  }
  /*Links del Footer*/
  .footLinks{
@@ -52,3 +60,35 @@ body {
     margin-left: 5%;
     margin-top: 1%;
  }
+
+ /*Estilos Log In*/
+
+ /*Formulario Log In*/
+ #formLogin{
+   width: 40%;
+   margin-left: 30%; 
+   background-color:#FFBA5C;
+   height:25rem;
+}
+
+#logInTitulo{
+   text-align: center;
+   color: #FFF;
+   margin-top: 2%;
+   margin-bottom: 2%;
+}
+
+.logInTitulos{
+   text-align: center;
+   color: #000000;
+   font-weight:600;
+   margin-top:2%;
+}
+
+ /*Estilos Log In*/
+ #formRegistro{
+   width: 40%;
+   margin-left: 30%; 
+   background-color:#FFBA5C;
+   height:35rem;
+}
