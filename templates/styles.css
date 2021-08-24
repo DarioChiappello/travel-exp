@@ -102,7 +102,6 @@ body {
 
  /*Estilos Perfil*/
  #deleteCuenta{
-
    background-color:#FFBA5C;
 }
 
@@ -123,6 +122,24 @@ body {
    text-align: center;
    font-size: 12px;
    line-height: 1.42857;
+}
+
+ /*Estilos Publicación*/
+#publicacionContainer{
+   background-color:#FFBA5C;
+}
+
+#cuerpoPublicacion{
+   margin-left: 20%;
+   background-color: #FFBA5C;
+   border-style: solid;
+   border-width: 2px;
+   border-color: #000000;
+}
+
+#botonPublicar{
+   margin-left: 85%;
+
 }
  
  
