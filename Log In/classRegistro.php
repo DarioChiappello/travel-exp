@@ -36,7 +36,7 @@
          $resultado = $conexion->buscar_por_sql($sql);
          $usuario = mysqli_fetch_array($resultado);
          if (isset($usuario)){
-            die("El correo ingresado ya existe.");
+            die("El usuario ingresado ya existe.");
          }else{
             $insert ="INSERT INTO usuarios(`user_name`, `password`) 
                       VALUES('$user', '$password')";
