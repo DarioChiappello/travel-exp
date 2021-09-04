@@ -1,3 +1,6 @@
+<?php
+require_once('session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +25,22 @@
       <div class="row">
         <div class="col-md-10">
           <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido Usuario </strong></h3>
-          <form action="#" method="post">
+          <?php
+            if(isset($_SESSION['error_password'])){
+              //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
+              echo'<div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>'.$_SESSION['error_password'].'</div></div>';
+            }
+          ?>
+          <form action="passChange.php" method="post">
             <div class="col-md-3">
               <div class="md-5 ms-4 mt-4">
                 <label for="exampleFormControlInput1" class="form-label h4 mb-4 text-white">Cambiar contraseña</label>
               </div>
               <div class="row">
                 <div class="col-md-10 ms-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingresar nueva contraseña">
+                  <input type="text" name="newpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingresar nueva contraseña">
                 </div>
                 <div class="col-md-1">
                   <button type="submit" class="btn btn-primary text-dark ps-4 pe-4" id="botonForm">Enviar</button>
