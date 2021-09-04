@@ -5,9 +5,9 @@
       //Función general para buscar en las 3 tablas principales
       public function logIn(){
          if($this->buscarPorCorreo() == true){
-            header("Location:perfil.html");
+            header("Location:perfil.php");
          }elseif($this->buscarAdmin() == true){
-            header("Location:perfilAdmin.html");
+            header("Location:perfilAdmin.php");
          }elseif($this->buscarBloqueado() == true){
             header("Location:index.html");
          }else{
