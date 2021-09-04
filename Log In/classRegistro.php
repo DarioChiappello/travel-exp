@@ -4,7 +4,7 @@
    class Insert{
       public function comprobarPassword($pass,$pass1){
          if ($pass == "" || $pass1 == "") {
-           header("Location:index.html");
+           header("Location:index.php");
          }else{
             $pass = trim($pass);
             $pass1 = trim($pass1);
@@ -20,7 +20,7 @@
       public function confirmarUsuario(){
          $user = $_POST["user"];
          if ($user == "") {
-            return header("Location:index.html");
+            return header("Location:index.php");
          }else{
             return $user;
          } 
@@ -41,7 +41,7 @@
             $insert ="INSERT INTO usuarios(`user_name`, `password`) 
                       VALUES('$user', '$password')";
             $resultado = $conexion->buscar_por_sql($insert);
-            header("Location:Perfil.html");
+            header("Location:Perfil.php");
          }
       } 
    }

@@ -74,12 +74,12 @@ require_once('session.php');
           </div>
           <div class="row p-3 mt-4">
             <div class="col-md-6 ml-2">
-              <form action="">
+              <form action="deleteAccount.php" method="post">
                 <input type="submit" name="" value="Borrar cuenta" class="btn btn-primary text-dark" id="deleteCuenta">
               </form>
             </div>
             <div class="col-md-6">
-              <form action="">
+              <form >
                 <input type="submit" name="" value="+" class="btn  btn-circle btn-xl float-end " id="deleteCuenta">
               </form>
             </div>

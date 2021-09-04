@@ -39,7 +39,7 @@ require_once('session.php');
               <input type="submit" class="btn btn-primary ps-5 pe-5" value="Iniciar"></input>
             </div>
             <div class="col-md-4 pt-4"> 
-              <a href="Registro.html"><input type="button" class="btn btn-primary ps-5 pe-5" value="Registrarse"></input></a>
+              <a href="Registro.php"><input type="button" class="btn btn-primary ps-5 pe-5" value="Registrarse"></input></a>
             </div>
           </div>
         </div>

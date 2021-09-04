@@ -9,9 +9,9 @@
          }elseif($this->buscarAdmin() == true){
             header("Location:perfilAdmin.php");
          }elseif($this->buscarBloqueado() == true){
-            header("Location:index.html");
+            header("Location:index.php");
          }else{
-            header("Location:registro.html");
+            header("Location:registro.php");
          }
       }
 

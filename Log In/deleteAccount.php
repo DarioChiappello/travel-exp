@@ -3,41 +3,33 @@ require_once('session.php');
 require_once("database.php");
 
 $usuario = $_SESSION["user"];
-$passwordActual = sha1(trim($_SESSION['password']));
-$new_password = sha1(trim($_POST['newpassword']));
 
-$validate = validarPassword($usuario,$passwordActual, $new_password);
+$delete = deleteAccount($usuario);
 
-
-if($validate == false){
-    $_SESSION['error_password'] = "La contraseña ingresada no es valida";
+if($delete == false){
     header("Location:Perfil.php");
 }else{
     session_destroy();
-    header("Location:LogIn.php");
+    header("Location:index.php");
 }
 
-function validarPassword($user, $password, $new_password){
+function deleteAccount($user){
     global $conexion;
-    $sql = "SELECT `password`
+    $sql = "SELECT `user_name`
             FROM `usuarios`
-            WHERE `user_name` = '$user'
-            AND `password` = '$password'";
+            WHERE `user_name` = '$user'";
     $resultado = $conexion->buscar_por_sql($sql);
-    $contrasena = mysqli_fetch_array($resultado);
-    if($contrasena['password'] == $new_password){
+    $cuenta = mysqli_fetch_array($resultado);
+    
+    if(!isset($cuenta)){
         return false;
     }else{
-        $update = "UPDATE `usuarios`
-                   SET `password` = '$new_password'
+        $delete = "DELETE FROM `usuarios`
                    WHERE `user_name` = '$user'";
-        $resultado = $conexion->buscar_por_sql($update);
+        $resultado = $conexion->buscar_por_sql($delete);
         return true;
     }
     
-
-    
 }
-
 
 ?>
