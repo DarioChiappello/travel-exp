@@ -1,5 +1,10 @@
 <?php
 require_once('session.php');
+if (isset($_SESSION['user'])){
+  $usuario = $_SESSION['user'];
+}else{
+  header('Location:LogIn.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +33,7 @@ require_once('session.php');
           <?php
             if(isset($_SESSION['error_password'])){
               //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
-              echo'<div class="alert alert-danger d-flex align-items-center" role="alert">
+              echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                 <div>'.$_SESSION['error_password'].'</div></div>';
             }
@@ -45,14 +50,19 @@ require_once('session.php');
                 <div class="col-md-1">
                   <button type="submit" class="btn btn-primary text-dark ps-4 pe-4" id="botonForm">Enviar</button>
                 </div>
-    
               </div>
             </div>
           </form>
         </div>
         <div class="col-md-2">
-          <img src="img/profile.png" class="rounded  img-circle" alt="...">
-          <p class=" text-white pr-2">Cambiar foto de perfil</p>
+          <form action="cambiarImagen.php" method="post">
+            <img src="img/profile.png" class="rounded  img-circle" alt="...">
+            <input type="file" name="img" id="">
+            <p class=" text-white pr-2">Cambiar foto de perfil</p>
+          </form>
+          <form action="cerrarSesion.php" method="post">
+            <button class="btn btn-warning">Cerrar Sesión</button>
+          </form>
         </div>
       </div>
       <div class="container-fluid">
@@ -85,13 +95,21 @@ require_once('session.php');
             </div>
           </div>
       </div>
-      
-
-
       <footer id="footer">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Cookies</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
+     <?php
+            if(isset($_SESSION['error_password'])){
+              echo "<script> 
+                      function myFunction(){
+                        setTimeout(function(){ location.reload(); }, 3000);
+                      }
+                      myFunction();
+                    </script>";
+              unset($_SESSION['error_password']);
+            }
+      ?>
 </body>
 </html>
