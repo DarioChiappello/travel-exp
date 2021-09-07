@@ -55,10 +55,10 @@ if (isset($_SESSION['user'])){
           </form>
         </div>
         <div class="col-md-2">
-          <form action="cambiarImagen.php" method="post">
-            <img src="img/profile.png" class="rounded  img-circle" alt="...">
-            <input type="file" name="img" id="">
-            <p class=" text-white pr-2">Cambiar foto de perfil</p>
+          <form action="cambiarImage.php" method="post" enctype="multipart/form-data">
+            <img src="img/profile.png" class="rounded img-circle" alt="...">
+            <input type="file" name="uploadfile">
+            <button type="submit" class="btn btn-warning mb-3 mt-2" name="upload">Cambiar foto de perfil</button>
           </form>
           <form action="cerrarSesion.php" method="post">
             <button class="btn btn-warning">Cerrar Sesión</button>
