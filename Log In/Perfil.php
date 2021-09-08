@@ -1,10 +1,17 @@
 <?php
 require_once('session.php');
+require_once('database.php');
 if (isset($_SESSION['user'])){
   $usuario = $_SESSION['user'];
 }else{
   header('Location:LogIn.php');
 }
+$consulta = "SELECT `foto`
+FROM `usuarios`
+WHERE `user_name` = '$usuario'";
+$resultado = $conexion->buscar_por_sql($consulta);
+$resultado = mysqli_fetch_array($resultado);
+$_SESSION["imagen"] = $resultado["foto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +36,7 @@ if (isset($_SESSION['user'])){
       </header>
       <div class="row">
         <div class="col-md-10">
-          <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido Usuario </strong></h3>
+          <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido <?php $_SESSION["user"]; ?> </strong></h3>
           <?php
             if(isset($_SESSION['error_password'])){
               //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
@@ -56,7 +63,13 @@ if (isset($_SESSION['user'])){
         </div>
         <div class="col-md-2">
           <form action="cambiarImage.php" method="post" enctype="multipart/form-data">
-            <img src="img/profile.png" class="rounded img-circle" alt="...">
+          <?php
+            if (isset($_SESSION["imagen"]) && $_SESSION["imagen"] != "") {
+              echo "<img src='img/". $_SESSION['imagen']." 'class='rounded img-circle' width='120' height='120'>";
+            }else{
+              echo '<img src="img/profile.png" class="rounded img-circle">';
+            }
+          ?>
             <input type="file" name="uploadfile">
             <button type="submit" class="btn btn-warning mb-3 mt-2" name="upload">Cambiar foto de perfil</button>
           </form>
