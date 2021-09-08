@@ -102,9 +102,9 @@ $_SESSION["imagen"] = $resultado["foto"];
               </form>
             </div>
             <div class="col-md-6">
-              <form >
+              <a href="crearEntrada.php" >
                 <input type="submit" name="" value="+" class="btn  btn-circle btn-xl float-end " id="deleteCuenta">
-              </form>
+          </a>
             </div>
           </div>
       </div>
