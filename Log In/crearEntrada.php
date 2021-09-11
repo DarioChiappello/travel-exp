@@ -22,10 +22,11 @@
       <div class="container text-white mt-4" id="publicacionContainer">
         <div class="row mb-3">
           <div class="col md-1 p-4">
-            <form action="crearPublicacion.php" method="POST">
+            <form action="crearPublicacion.php" method="POST" enctype="multipart/form-data">
+          
             <img src="https://www.entornoturistico.com/wp-content/uploads/2016/01/turismo-600x400.jpg" width="80%" alt="">
             <div class="mb-3">
-              <input class="form-control mt-2 " name="foto" type="file" id="formFile">
+              <input class="form-control mt-2 " name="uploadfile" type="file" id="formFile">
             </div>
           </div>
           <div class="col md-4 p-4 me-5">
@@ -74,7 +75,7 @@
             <textarea class="form-control" name="texto" cols="100" rows="8" aria-label="With textarea" id="cuerpoPublicacion"></textarea>
           </div>
         </div>
-        <input type="submit" class="btn btn-primary mt-4 float-right ps-4 pe-4 mb-3" id="botonPublicar" value="Publicar"></input>
+        <input type="submit" name="upload" class="btn btn-primary mt-4 float-right ps-4 pe-4 mb-3" id="botonPublicar" value="Publicar"></input>
       </form>
       </div>     
       <footer id="footer">

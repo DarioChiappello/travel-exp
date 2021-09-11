@@ -27,7 +27,12 @@ $_SESSION["imagen"] = $resultado["foto"];
 <body>
       <header id="header">
         <nav>
-          <a href="#" class="navLinks">Ingresar</a>
+          <a href="#" class="navLinks"><?php if(isset($_SESSION['user'])){
+            echo $_SESSION['user'];
+          }else{
+            echo "Perfil";
+          }  ?>
+          </a>
           <a href="#" class="navLinks">Contacto</a>
           <a href="#" class="navLinks">Publicaciones</a>
           <a href="#" class="navLinks">Inicio</a>
@@ -36,7 +41,7 @@ $_SESSION["imagen"] = $resultado["foto"];
       </header>
       <div class="row">
         <div class="col-md-10">
-          <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido <?php $_SESSION["user"]; ?> </strong></h3>
+          <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido <?php echo $_SESSION["user"]; ?> </strong></h3>
           <?php
             if(isset($_SESSION['error_password'])){
               //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
