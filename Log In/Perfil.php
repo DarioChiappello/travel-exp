@@ -1,6 +1,7 @@
 <?php
 require_once('session.php');
 require_once('database.php');
+require_once('userPublicaciones.php');
 if (isset($_SESSION['user'])){
   $usuario = $_SESSION['user'];
 }else{
@@ -85,7 +86,45 @@ $_SESSION["imagen"] = $resultado["foto"];
       </div>
       <div class="container-fluid">
         <h2 class="p-2 pb-2 text-white">Publicaciones</h2>
-          <div class="card p-3 col-md-8"  id="ultPost" >
+        <?php
+            if(isset($_SESSION['publicaciones'])){
+              //var_dump($_SESSION['publicaciones']);
+              foreach($_SESSION['publicaciones'] as $key)
+              {
+                //var_dump($key['titulo']);
+                $estrellas = $key['calificacion'];
+                $estrellas_str = '';
+                for($i = 0; $i < $estrellas; $i++){
+                  $estrellas_str .= "★";
+                }
+                echo '<div class="card p-3 col-md-8 mt-2"  id="ultPost" >
+                <div class="row g-0">
+                  <div class="col-md-6">
+                    <img src="profile/'.$key['foto'].'" class="img-fluid" alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">'.$key['titulo'].'</h5>
+                      <p class="card-text">'.$estrellas_str.' </p>
+                      <p class="card-text">'.$key['actividad'].' </p>
+                      <p class="card-text">'.$key['contenido'].'</p>
+                      <p class="card-text"><small class="text-muted">'.$key['fecha'].'</small></p>
+                      <form action="editarPublicacion.php" method="POST" >
+                      <button class="btn btn-primary">Editar</button>
+                      </form>
+                      <form action="eliminarPublicacion.php" method="POST" >
+                      <button class="btn btn-danger">Eliminar</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>';
+              }
+            }
+           
+
+            /*
+            <div class="card p-3 col-md-8"  id="ultPost" >
               <div class="row g-0">
                 <div class="col-md-2">
                   <img src="https://ichef.bbci.co.uk/news/800/cpsprodpb/D939/production/_103590655_valija-turismo.png" class="img-fluid" alt="...">
@@ -99,6 +138,9 @@ $_SESSION["imagen"] = $resultado["foto"];
                 </div>
               </div>
             </div>
+            */
+            ?>
+          
           </div>
           <div class="row p-3 mt-4">
             <div class="col-md-6 ml-2">

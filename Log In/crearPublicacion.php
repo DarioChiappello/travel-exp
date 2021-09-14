@@ -54,8 +54,8 @@ $resultado = mysqli_fetch_array($resultado);
 
 $idUsuario= $resultado["user_id"];
 
-$insert ="INSERT INTO publicaciones(`user_id`,`fecha`,`titulo`,`contenido`, `calificacion`,`foto`,`id_provincia`)
-                      VALUES('$idUsuario','$date','$titulo','$contenido','$puntuacion','$filename','$provincia')";
+$insert ="INSERT INTO publicaciones(`user_id`,`fecha`,`titulo`,`contenido`, `calificacion`,`foto`,`id_provincia`,`actividad`)
+                      VALUES('$idUsuario','$date','$titulo','$contenido','$puntuacion','$filename','$provincia','$actividad')";
 $resultado = $conexion->buscar_por_sql($insert);
 
 

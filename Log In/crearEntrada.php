@@ -41,9 +41,11 @@
                 <div class="col-sm-10">
                   <select class="form-select" name="calificacion" aria-label="Default select example">
                     <option selected>Elegir calificación</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5">★★★★★</option>
                   </select>
                 </div>
               </div>
@@ -52,8 +54,8 @@
                 <div class="col-sm-10">
                   <select class="form-select" name="actividad" aria-label="Default select example">
                     <option selected>Elegir actividad</option>
-                    <option value="1">Deporte</option>
-                    <option value="2">Turismo</option>
+                    <option value="Deporte">Deporte</option>
+                    <option value="Turismo">Turismo</option>
                   </select>
                 </div>
               </div>
