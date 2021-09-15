@@ -97,7 +97,7 @@ $_SESSION["imagen"] = $resultado["foto"];
                 for($i = 0; $i < $estrellas; $i++){
                   $estrellas_str .= "★";
                 }
-                echo '<div class="card p-3 col-md-8 mt-2"  id="ultPost" >
+                echo '<div class="card p-3 col-md-8 mt-2"  id='.$key['publicacion_id'].' >
                 <div class="row g-0">
                   <div class="col-md-6">
                     <img src="profile/'.$key['foto'].'" class="img-fluid" alt="...">

@@ -11,10 +11,6 @@ $actividad = $_POST["actividad"];
 $date = date("Y-m-d", time() - 3600*24);
 $date_img = date("Y-m-dHms");
 
-
-
-
-  
 if (isset($_POST['upload'])) {
 
   $filename = $_FILES["uploadfile"]["name"];
@@ -34,36 +30,17 @@ if (isset($_POST['upload'])) {
   
 }
 
-
-
-
-
-if (empty($titulo)||empty($puntuacion)||empty($provincia)||empty($contenido)||empty($actividad)){
-    echo "no se puede crear campos vacios";
-}
-else {
-    global $conexion;
+global $conexion;
 $user=$_SESSION["user"];
-
 $sql = "SELECT `user_id`
-FROM `usuarios`
-WHERE `user_name` = '$user'";
-
+        FROM `usuarios`
+        WHERE `user_name` = '$user'";
 $resultado = $conexion->buscar_por_sql($sql);
 $resultado = mysqli_fetch_array($resultado);
-
 $idUsuario= $resultado["user_id"];
-
 $insert ="INSERT INTO publicaciones(`user_id`,`fecha`,`titulo`,`contenido`, `calificacion`,`foto`,`id_provincia`,`actividad`)
-                      VALUES('$idUsuario','$date','$titulo','$contenido','$puntuacion','$filename','$provincia','$actividad')";
+          VALUES('$idUsuario','$date','$titulo','$contenido','$puntuacion','$filename','$provincia','$actividad')";
 $resultado = $conexion->buscar_por_sql($insert);
-
-
 header("Location:Perfil.php");
-
-
-}
-
-
 
 ?>
