@@ -110,9 +110,12 @@ $_SESSION["imagen"] = $resultado["foto"];
                       <p class="card-text">'.$key['contenido'].'</p>
                       <p class="card-text"><small class="text-muted">'.$key['fecha'].'</small></p>
                       <form action="editarPublicacion.php" method="POST" >
+                      <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
                       <button class="btn btn-primary">Editar</button>
                       </form>
                       <form action="eliminarPublicacion.php" method="POST" >
+                      
+                      <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
                       <button class="btn btn-danger">Eliminar</button>
                       </form>
                     </div>
