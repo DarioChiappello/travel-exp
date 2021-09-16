@@ -1,6 +1,7 @@
 <?php
 require_once("database.php");
 require_once("session.php");
+$idPublicacion = $_SESSION["idPublicacion"];
 
 $titulo = $_POST["titulo"];
 //$imagen = $_POST["uploadfile"];
@@ -22,7 +23,7 @@ if (isset($_POST['upload'])) {
   $folder = "profile/".$filename;
   $user = $_SESSION["user"];
   if(empty($filename)){
-     header("Location:crearEntrada.php");   
+     header("Location:editarPublicacion.php");   
   }else{
     move_uploaded_file($tempname, $folder);
 
@@ -31,16 +32,13 @@ if (isset($_POST['upload'])) {
 }
 
 global $conexion;
-$user=$_SESSION["user"];
-$sql = "SELECT `user_id`
-        FROM `usuarios`
-        WHERE `user_name` = '$user'";
-$resultado = $conexion->buscar_por_sql($sql);
-$resultado = mysqli_fetch_array($resultado);
-$idUsuario= $resultado["user_id"];
-$insert ="INSERT INTO publicaciones(`user_id`,`fecha`,`titulo`,`contenido`, `calificacion`,`foto`,`nombre_provincia`,`actividad`)
-          VALUES('$idUsuario','$date','$titulo','$contenido','$puntuacion','$filename','$provincia','$actividad')";
-$resultado = $conexion->buscar_por_sql($insert);
+$sql = "UPDATE `publicaciones`
+        SET `titulo` = '$titulo', `calificacion` = '$puntuacion', `foto` = '$filename', `contenido` = '$contenido', `actividad` = '$actividad', `nombre_provincia` = '$provincia'
+        WHERE `publicacion_id` = '$idPublicacion'";
+
+$res = $conexion->buscar_por_sql($sql);
+
 header("Location:Perfil.php");
+
 
 ?>

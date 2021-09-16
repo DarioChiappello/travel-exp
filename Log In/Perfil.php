@@ -109,14 +109,18 @@ $_SESSION["imagen"] = $resultado["foto"];
                       <p class="card-text">'.$key['actividad'].' </p>
                       <p class="card-text">'.$key['contenido'].'</p>
                       <p class="card-text"><small class="text-muted">'.$key['fecha'].'</small></p>
+                      <p class="card-text"><small class="text-muted">'.$key['nombre_provincia'].'</small></p>
                       <form action="editarPublicacion.php" method="POST" >
                       <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                      <button class="btn btn-primary">Editar</button>
+                      </form>
+                      <form action="editarPublicacion.php" method="POST" >
+                        <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
+                        <button class="btn btn-primary">Editar</button>
+                      </form>
                       </form>
                       <form action="eliminarPublicacion.php" method="POST" >
-                      
-                      <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                      <button class="btn btn-danger">Eliminar</button>
+                        <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
+                        <button class="btn btn-danger">Eliminar</button>
                       </form>
                     </div>
                   </div>
@@ -154,7 +158,7 @@ $_SESSION["imagen"] = $resultado["foto"];
             <div class="col-md-6">
               <a href="crearEntrada.php" >
                 <input type="submit" name="" value="+" class="btn  btn-circle btn-xl float-end " id="deleteCuenta">
-          </a>
+              </a>
             </div>
           </div>
       </div>

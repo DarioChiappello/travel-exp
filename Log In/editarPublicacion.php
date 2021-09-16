@@ -1,3 +1,17 @@
+<?php
+require_once("database.php");
+require_once("session.php");
+$idPublicacion = $_POST["publicacion"];
+$_SESSION["idPublicacion"] = $idPublicacion;
+
+global $conexion;
+$sql = "SELECT `titulo`, `calificacion`, `foto`, `contenido`, `actividad`, `nombre_provincia`
+        FROM `publicaciones`
+        WHERE `publicacion_id` = $idPublicacion";
+$res = $conexion->buscar_por_sql($sql);
+$result=mysqli_fetch_array($res);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +36,8 @@
       <div class="container text-white mt-4" id="publicacionContainer">
         <div class="row mb-3">
           <div class="col md-1 p-4">
-            <form action="crearPublicacion.php" method="POST" enctype="multipart/form-data">
-          
-            <img src="https://www.entornoturistico.com/wp-content/uploads/2016/01/turismo-600x400.jpg" width="80%" alt="">
+            <form action="modificarPublicacion.php" method="POST" enctype="multipart/form-data">
+            <img src="<?php echo "profile/".$result["foto"];?>" width="80%" alt="">
             <div class="mb-3">
               <input class="form-control mt-2 " name="uploadfile" type="file" id="formFile" required>
             </div>
@@ -33,19 +46,51 @@
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Título</label>
                 <div class="col-sm-10">
-                  <input type="text" name="titulo" class="form-control-plaintext bg-white" id="staticEmail" required>
+                  <input type="text" name="titulo" class="form-control-plaintext bg-white" id="staticEmail" value="<?php echo $result["titulo"];?>"required>
                 </div>
               </div>
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Calificación</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="calificacion" aria-label="Default select example" required>
-                    <option selected value="">Elegir calificación</option>
-                    <option value="1">★</option>
-                    <option value="2">★★</option>
-                    <option value="3">★★★</option>
-                    <option value="4">★★★★</option>
-                    <option value="5">★★★★★</option>
+                  <?php
+                      if($result["calificacion"] == 1){
+                        echo "<option value=''>Elegir calificación</option>
+                              <option selected value='1'>★</option>
+                              <option value='2'>★★</option>
+                              <option value='3'>★★★</option>
+                              <option value='4'>★★★★</option>
+                              <option value='5'>★★★★★</option>";
+                      }elseif($result["calificacion"] == 2){
+                        echo "<option value=''>Elegir calificación</option>
+                              <option value='1'>★</option>
+                              <option selected value='2'>★★</option>
+                              <option value='3'>★★★</option>
+                              <option value='4'>★★★★</option>
+                              <option value='5'>★★★★★</option>";
+                      }elseif($result["calificacion"] == 3){
+                        echo "<option value=''>Elegir calificación</option>
+                              <option  value='1'>★</option>
+                              <option value='2'>★★</option>
+                              <option selected value='3'>★★★</option>
+                              <option value='4'>★★★★</option>
+                              <option value='5'>★★★★★</option>";
+                      }elseif($result["calificacion"] == 4){
+                        echo "<option value=''>Elegir calificación</option>
+                              <option  value='1'>★</option>
+                              <option value='2'>★★</option>
+                              <option value='3'>★★★</option>
+                              <option selected value='4'>★★★★</option>
+                              <option value='5'>★★★★★</option>";
+                      }else{
+                        echo "<option value=''>Elegir calificación</option>
+                              <option  value='1'>★</option>
+                              <option value='2'>★★</option>
+                              <option value='3'>★★★</option>
+                              <option value='4'>★★★★</option>
+                              <option selected value='5'>★★★★★</option>";
+                      }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -53,9 +98,17 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Actividad</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="actividad" aria-label="Default select example" required>
-                    <option selected value="">Elegir actividad</option>
-                    <option value="Deporte">Deporte</option>
-                    <option value="Turismo">Turismo</option>
+                    <?php
+                      if($result["actividad"] == "Deporte"){
+                        echo "<option value=''>Elegir actividad</option>
+                              <option selected value='Deporte'>Deporte</option>
+                              <option value='Turismo'>Turismo</option>";
+                      }else{
+                        echo "<option value=''>Elegir actividad</option>
+                              <option value='Deporte'>Deporte</option>
+                              <option selected value='Turismo'>Turismo</option>";
+                      }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -94,10 +147,10 @@
         </div>
         <div class="input-group">
           <div>
-            <textarea class="form-control" name="texto" cols="100" rows="8" aria-label="With textarea" id="cuerpoPublicacion" required></textarea>
+            <textarea class="form-control" name="texto" cols="100" rows="8" aria-label="With textarea" id="cuerpoPublicacion" required><?php echo $result["contenido"];?></textarea>
           </div>
         </div>
-        <input type="submit" name="upload" class="btn btn-primary mt-4 float-right ps-4 pe-4 mb-3" id="botonPublicar" value="Publicar"></input>
+        <input type="submit" name="upload" class="btn btn-primary mt-4 float-right ps-4 pe-4 mb-3" id="botonPublicar" value="Editar"></input>
       </form>
       </div>     
       <footer id="footer">
