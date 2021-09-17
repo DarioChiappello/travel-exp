@@ -28,15 +28,15 @@ $_SESSION["imagen"] = $resultado["foto"];
 <body>
       <header id="header">
         <nav>
-          <a href="#" class="navLinks"><?php if(isset($_SESSION['user'])){
+          <a href="Perfil.php" class="navLinks"><?php if(isset($_SESSION['user'])){
             echo $_SESSION['user'];
           }else{
             echo "Perfil";
           }  ?>
           </a>
-          <a href="#" class="navLinks">Contacto</a>
-          <a href="#" class="navLinks">Publicaciones</a>
-          <a href="#" class="navLinks">Inicio</a>
+          <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
+          <a href="publicaciones.php" class="navLinks">Publicaciones</a>
+          <a href="index.php" class="navLinks">Inicio</a>
           <h2  id="titulo">Travel Exp</h2>
         </nav>
       </header>
@@ -97,8 +97,8 @@ $_SESSION["imagen"] = $resultado["foto"];
                 for($i = 0; $i < $estrellas; $i++){
                   $estrellas_str .= "★";
                 }
-                echo '<div class="card p-3 col-md-8 mt-2"  id='.$key['publicacion_id'].' >
-                <div class="row g-0">
+                echo '<div class="card p-3 col-md-8 mt-2 " style="background-color:#FFBA5C;"  id=" '.$key['publicacion_id'].'" >
+                <div class="row g-0" >
                   <div class="col-md-6">
                     <img src="profile/'.$key['foto'].'" class="img-fluid" alt="...">
                   </div>
@@ -110,18 +110,21 @@ $_SESSION["imagen"] = $resultado["foto"];
                       <p class="card-text">'.$key['contenido'].'</p>
                       <p class="card-text"><small class="text-muted">'.$key['fecha'].'</small></p>
                       <p class="card-text"><small class="text-muted">'.$key['nombre_provincia'].'</small></p>
-                      <form action="editarPublicacion.php" method="POST" >
-                      <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                      </form>
-                      <form action="editarPublicacion.php" method="POST" >
-                        <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                        <button class="btn btn-primary">Editar</button>
-                      </form>
-                      </form>
-                      <form action="eliminarPublicacion.php" method="POST" >
-                        <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                        <button class="btn btn-danger">Eliminar</button>
-                      </form>
+                      <div class="row">
+                        <div class="col-md-2">
+                          <form action="editarPublicacion.php" method="POST" >
+                            <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
+                            <button class="btn btn-primary">Editar</button>
+                          </form>
+                        </div>
+                      <div class="col-md-2">
+                        <form action="eliminarPublicacion.php" method="POST" >
+                          <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
+                          <button class="btn btn-danger">Eliminar</button>
+                        </form>
+                      </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,3 +1,12 @@
+<?php
+require_once('session.php');
+require_once('database.php');
+require_once('userPublicaciones.php');
+if (isset($_SESSION['user'])){
+  $usuario = $_SESSION['user'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +20,19 @@
 </head>
 <body>
       <header id="header">
-        <nav>
-          <a href="#" class="navLinks">Ingresar</a>
-          <a href="#" class="navLinks">Contacto</a>
-          <a href="#" class="navLinks">Publicaciones</a>
-          <a href="#" class="navLinks">Inicio</a>
+      <nav>
+          <?php if(isset($_SESSION['user'])){
+            echo '<a href="Perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';
+          }else{
+            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
+          }  ?>
+          
+          <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
+          <a href="publicaciones.php" class="navLinks">Publicaciones</a>
+          <a href="index.php" class="navLinks">Inicio</a>
           <h2  id="titulo">Travel Exp</h2>
-        </nav>
+        </nav>  
+      
       </header>
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
