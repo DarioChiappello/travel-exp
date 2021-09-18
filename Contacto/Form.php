@@ -17,13 +17,13 @@ require_once('../Log In/database.php');
       <header id="header">
       <nav>
       <?php 
-            if($_SESSION['user'] == "admin"){
+            if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
               echo '<a href="../Log In/perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
             }elseif(!isset($_SESSION['user'])){
               echo '<a href="../Log In/Login.php" class="navLinks">Ingresar</a>';
             }else{
               echo '<a href="../Log In/perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
-        ?>          
+          ?>         
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="../Log In/publicaciones.php" class="navLinks">Publicaciones</a>
           <a href="../Log In/index.php" class="navLinks">Inicio</a>

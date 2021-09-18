@@ -2,6 +2,15 @@
   require_once('session.php');
   require_once('database.php');
   require_once('adminPublicaciones.php');
+  $usuario = $_SESSION["user"];
+  $consulta = "SELECT `foto`
+             FROM `administradores`
+             WHERE `nombre` = '$usuario'";
+$resultado = $conexion->buscar_por_sql($consulta);
+$resultado = mysqli_fetch_array($resultado);
+$_SESSION["imagen"] = $resultado["foto"];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +52,7 @@
                 <div>'.$_SESSION['error_password'].'</div></div>';
             }
           ?>
-          <form action="passChange.php" method="post">
+          <form action="cambiarPassAdmin.php" method="post">
             <div class="col-md-3">
               <div class="md-5 ms-4 mt-4">
                 <label for="exampleFormControlInput1" class="form-label h4 mb-4 text-white">Cambiar contraseña</label>
@@ -60,7 +69,7 @@
           </form>
         </div>
         <div class="col-md-2">
-          <form action="cambiarImage.php" method="post" enctype="multipart/form-data">
+          <form action="cambiarImageAdmin.php" method="post" enctype="multipart/form-data">
           <?php
             if (isset($_SESSION["imagen"]) && $_SESSION["imagen"] != "") {
               echo "<img src='img/". $_SESSION['imagen']." 'class='rounded img-circle' width='120' height='120'>";
@@ -77,12 +86,12 @@
         </div>
       </div>
       <div class="container-fluid">
-        <h2 class="p-2 pb-2 text-white">Publicaciones</h2>
+        <h2 class="p-2 pb-2 text-white">Noticias</h2>
         <?php
+            
             if(isset($_SESSION['publicaciones'])){
               foreach($_SESSION['publicaciones'] as $key)
               {
-              }
                 echo '<div class="card p-3 col-md-8 mt-2 " style="background-color:#FFBA5C;"  id=" '.$key['noticia_id'].'" >
                 <div class="row g-0" >
                   <div class="col-md-6">
@@ -94,14 +103,14 @@
                       <p class="card-text">'.$key['contenido'].'</p>
                       <div class="row">
                         <div class="col-md-2">
-                          <form action="editarPublicacion.php" method="POST" >
-                            <input type="hidden" name="publicacion" value="'.$key['noticia_id'].'">
+                          <form action="editarNoticia.php" method="POST" >
+                            <input type="hidden" name="noticia" value="'.$key['noticia_id'].'">
                             <button class="btn btn-primary">Editar</button>
                           </form>
                         </div>
                       <div class="col-md-2">
-                        <form action="eliminarPublicacion.php" method="POST" >
-                          <input type="hidden" name="publicacion" value="'.$key['noticia_id'].'">
+                        <form action="eliminarNoticia.php" method="POST" >
+                          <input type="hidden" name="noticia" value="'.$key['noticia_id'].'">
                           <button class="btn btn-danger">Eliminar</button>
                         </form>
                       </div>
@@ -110,12 +119,14 @@
                   </div>
                 </div>
               </div>';
+              }
+                
             }else{}
             ?>
           </div>
           <div class="row p-3 mt-4">
             <div class="col-md-11">
-              <a href="crearEntrada.php" >
+              <a href="crearNoticia.php" >
                 <input type="submit" name="" value="+" class="btn  btn-circle btn-xl float-end" id="deleteCuenta">
               </a>
             </div>

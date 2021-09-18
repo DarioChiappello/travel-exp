@@ -30,7 +30,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
       <nav>
           <a href="Perfil.php" class="navLinks">
           <?php 
-            if($_SESSION['user'] == "admin"){
+            if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
               echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
             }elseif(!isset($_SESSION['user'])){
               echo '<a href="Login.php" class="navLinks">Ingresar</a>';
@@ -45,6 +45,18 @@ while ($result=mysqli_fetch_array($articulos_exec)){
         </nav>
       </header>
       <?php
+
+          if(count($response) == 0){
+            echo '<div class="container-flex m-4" id="ultPost">
+                    <div class="text-center">
+                    <h2>No hay publicaciones para mostrar</h2>
+                    <p>
+                      No hay publicaciones creadas hasta el momento.
+                    </p>
+                  </div>
+                </div>';
+          }
+
 
           foreach($response as $articulo){
             $estrellas = $articulo['calificacion'];

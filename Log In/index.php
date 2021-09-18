@@ -9,11 +9,7 @@ $sql = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calif
         LIMIT 1";
 $res = $conexion->buscar_por_sql($sql);
 $result=mysqli_fetch_array($res);
-$estrellas = $result['calificacion'];
-$estrellas_str = '';
-for($i = 0; $i < $estrellas; $i++){
-  $estrellas_str .= "★";
-}
+
 
 ?>
 
@@ -31,14 +27,14 @@ for($i = 0; $i < $estrellas; $i++){
 <body>
       <header id="header">
       <nav>
-        <?php 
-            if($_SESSION['user'] == "admin"){
+      <?php 
+            if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
               echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
             }elseif(!isset($_SESSION['user'])){
               echo '<a href="Login.php" class="navLinks">Ingresar</a>';
             }else{
               echo '<a href="perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
-        ?>
+          ?>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
           <a href="index.php" class="navLinks">Inicio</a>
@@ -107,6 +103,13 @@ for($i = 0; $i < $estrellas; $i++){
                         </div>
                       </div>';
                 }else{
+                  
+                  $estrellas = $result['calificacion'];
+
+                  $estrellas_str = '';
+                  for($i = 0; $i < $estrellas; $i++){
+                    $estrellas_str .= "★";
+                  }
                   echo '<div class="container pt-4">
                         <h2 class="p-2 pb-2 text-center text-white">Último Post</h2>
                         <div class="card p-3"  id="ultPost">
