@@ -10,6 +10,25 @@ $sql = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calif
 $res = $conexion->buscar_por_sql($sql);
 $result=mysqli_fetch_array($res);
 
+$sliders = [];
+$slider = "SELECT `foto`,`titulo`,`contenido`
+FROM `noticias`
+ORDER BY noticia_id DESC
+LIMIT 3";
+
+$slider_sql = $conexion->buscar_por_sql($slider);
+$numrows = mysqli_num_rows($slider_sql);
+//$slider_resultado =mysqli_fetch_array($noticias);
+
+
+
+
+
+while ($resultado=mysqli_fetch_array($slider_sql)){
+    array_push($sliders, $resultado);
+}
+
+  
 
 ?>
 
@@ -41,6 +60,7 @@ $result=mysqli_fetch_array($res);
           <h2  id="titulo">Travel Exp</h2>
         </nav>  
       </header>
+      
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -48,7 +68,31 @@ $result=mysqli_fetch_array($res);
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
+        <?php
+
+        foreach($sliders as $key => $slider){
+          if($key == 0)
+          {
+            echo '<div class="carousel-item active">
+              <img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>'.$slider['titulo'].'Second slide label</h5>
+                <p>'.$slider['contenido'].'</p>
+              </div>
+            </div>';
+          }else{
+            echo '<div class="carousel-item">
+            <img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>'.$slider['titulo'].'Second slide label</h5>
+              <p>'.$slider['contenido'].'</p>
+            </div>
+          </div>';
+          }
+        }
+
+        ?>
+          <!--<div class="carousel-item active">
             <img src="https://www.entornoturistico.com/wp-content/uploads/2016/01/turismo-600x400.jpg" class="d-block w-100" alt="..." height="600px">
             <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
@@ -68,7 +112,7 @@ $result=mysqli_fetch_array($res);
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
             </div>
-          </div>
+          </div>-->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -115,15 +159,15 @@ $result=mysqli_fetch_array($res);
                         <div class="card p-3"  id="ultPost">
                           <div class="row g-0">
                             <div class="col-md-2">
-                              <img src="<?php echo "profile/".$result["foto"];?>" class="img-fluid" alt="...">
+                              <img src="profile/'.$result["foto"].'" class="img-fluid" alt="...">
                             </div>
                               <div class="col-md-8">
                                   <div class="card-body">
-                                    <h5 class="card-title"><?php echo $result["titulo"];?></h5>
-                                    <p class="card-text"><?php echo $estrellas_str;?></p>
-                                    <p class="card-text"><?php echo $result["actividad"];?></p>
-                                    <p class="card-text"><?php echo $result["nombre_provincia"];?></p>                 
-                                    <p class="card-text"><?php echo $result["contenido"];?></p>
+                                    <h5 class="card-title">'.$result["titulo"].'</h5>
+                                    <p class="card-text">'.$estrellas_str.'</p>
+                                    <p class="card-text">'.$result["actividad"].'</p>
+                                    <p class="card-text">'.$result["nombre_provincia"].'</p>                 
+                                    <p class="card-text">'.$result["contenido"].'</p>
                                     </div>
                                   </div>
                                 </div>
