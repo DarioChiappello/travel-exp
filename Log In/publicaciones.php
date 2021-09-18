@@ -28,11 +28,15 @@ while ($result=mysqli_fetch_array($articulos_exec)){
 <body>
       <header id="header">
       <nav>
-          <a href="Perfil.php" class="navLinks"><?php if(isset($_SESSION['user'])){
-            echo $_SESSION['user'];
-          }else{
-            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
-          }  ?>
+          <a href="Perfil.php" class="navLinks">
+          <?php 
+            if($_SESSION['user'] == "admin"){
+              echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
+            }elseif(!isset($_SESSION['user'])){
+              echo '<a href="Login.php" class="navLinks">Ingresar</a>';
+            }else{
+              echo '<a href="perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
+          ?>
           </a>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
@@ -99,9 +103,6 @@ while ($result=mysqli_fetch_array($articulos_exec)){
             
             </div>';
           }
-
-
-
     ?>
       
       

@@ -4,9 +4,9 @@ require_once('database.php');
 
 //Última publicación
 $sql = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`
-              FROM `publicaciones`
-              ORDER BY publicacion_id DESC
-              LIMIT 1";
+        FROM `publicaciones`
+        ORDER BY publicacion_id DESC
+        LIMIT 1";
 $res = $conexion->buscar_por_sql($sql);
 $result=mysqli_fetch_array($res);
 $estrellas = $result['calificacion'];
@@ -31,18 +31,19 @@ for($i = 0; $i < $estrellas; $i++){
 <body>
       <header id="header">
       <nav>
-          <?php if(isset($_SESSION['user'])){
-            echo '<a href="Perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';
-          }else{
-            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
-          }  ?>
-          
+        <?php 
+            if($_SESSION['user'] == "admin"){
+              echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
+            }elseif(!isset($_SESSION['user'])){
+              echo '<a href="Login.php" class="navLinks">Ingresar</a>';
+            }else{
+              echo '<a href="perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
+        ?>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
           <a href="index.php" class="navLinks">Inicio</a>
           <h2  id="titulo">Travel Exp</h2>
         </nav>  
-      
       </header>
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -82,29 +83,53 @@ for($i = 0; $i < $estrellas; $i++){
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      
       <div>
-        <div class="container pt-4">
-          <h2 class="p-2 pb-2 text-center text-white">Último Post</h2>
-          <div class="card p-3"  id="ultPost">
-            <div class="row g-0">
-              <div class="col-md-2">
-                <img src="<?php echo "profile/".$result["foto"];?>" class="img-fluid" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title"><?php echo $result["titulo"];?></h5>
-                  <p class="card-text"><?php echo $estrellas_str;?></p>
-                  <p class="card-text"><?php echo $result["actividad"];?></p>
-                  <p class="card-text"><?php echo $result["nombre_provincia"];?></p>                 
-                  <p class="card-text"><?php echo $result["contenido"];?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
+        <?php
+                if($result == NULL){
+                  echo '<div class="container pt-4">
+                        <h2 class="p-2 pb-2 text-center text-white">Último Post</h2>
+                        <div class="card p-3"  id="ultPost">
+                          <div class="row g-0">
+                            <div class="col-md-2">
+                              <img src="profile/profile.png" class="img-fluid" alt="...">
+                            </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">No hay post nuevos</h5>
+                                  <p class="card-text">No hay calificaciones</p>
+                                  <p class="card-text">Ninguna actividad</p>
+                                  <p class="card-text">No hay provincia</p>                 
+                                  <p class="card-text">Sin contenido</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>';
+                }else{
+                  echo '<div class="container pt-4">
+                        <h2 class="p-2 pb-2 text-center text-white">Último Post</h2>
+                        <div class="card p-3"  id="ultPost">
+                          <div class="row g-0">
+                            <div class="col-md-2">
+                              <img src="<?php echo "profile/".$result["foto"];?>" class="img-fluid" alt="...">
+                            </div>
+                              <div class="col-md-8">
+                                  <div class="card-body">
+                                    <h5 class="card-title"><?php echo $result["titulo"];?></h5>
+                                    <p class="card-text"><?php echo $estrellas_str;?></p>
+                                    <p class="card-text"><?php echo $result["actividad"];?></p>
+                                    <p class="card-text"><?php echo $result["nombre_provincia"];?></p>                 
+                                    <p class="card-text"><?php echo $result["contenido"];?></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>';
+                }
+        ?>
       <footer id="footer">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Cookies</a>
