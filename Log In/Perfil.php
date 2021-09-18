@@ -2,14 +2,11 @@
 require_once('session.php');
 require_once('database.php');
 require_once('userPublicaciones.php');
-if (isset($_SESSION['user'])){
-  $usuario = $_SESSION['user'];
-}else{
-  header('Location:LogIn.php');
-}
+
+$usuario = $_SESSION["user"];
 $consulta = "SELECT `foto`
-FROM `usuarios`
-WHERE `user_name` = '$usuario'";
+             FROM `usuarios`
+             WHERE `user_name` = '$usuario'";
 $resultado = $conexion->buscar_por_sql($consulta);
 $resultado = mysqli_fetch_array($resultado);
 $_SESSION["imagen"] = $resultado["foto"];
@@ -30,9 +27,7 @@ $_SESSION["imagen"] = $resultado["foto"];
         <nav>
           <a href="Perfil.php" class="navLinks"><?php if(isset($_SESSION['user'])){
             echo $_SESSION['user'];
-          }else{
-            echo "Perfil";
-          }  ?>
+          }?>
           </a>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>

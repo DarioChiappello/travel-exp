@@ -1,18 +1,6 @@
 <?php
 require_once('session.php');
 require_once('database.php');
-require_once('userPublicaciones.php');
-if (isset($_SESSION['user'])){
-  $usuario = $_SESSION['user'];
-}else{
-  header('Location:LogIn.php');
-}
-$consulta = "SELECT `foto`
-FROM `usuarios`
-WHERE `user_name` = '$usuario'";
-$resultado = $conexion->buscar_por_sql($consulta);
-$resultado = mysqli_fetch_array($resultado);
-$_SESSION["imagen"] = $resultado["foto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,14 +18,11 @@ $_SESSION["imagen"] = $resultado["foto"];
       <nav>
           <?php if(isset($_SESSION['user'])){
             echo '<a href="Perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';
-          }else{
-            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
-          }  ?>
-          
+          }?>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
           <a href="index.php" class="navLinks">Inicio</a>
-          <h2  id="titulo">Travel Exp</h2>
+          <h2 id="titulo">Travel Exp</h2>
         </nav>  
       </header>
       <div class="container text-white mt-4" id="publicacionContainer">
@@ -54,7 +39,7 @@ $_SESSION["imagen"] = $resultado["foto"];
               <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Título</label>
                 <div class="col-sm-10">
-                  <input type="text" name="titulo" class="form-control-plaintext bg-white" id="staticEmail" required>
+                  <input type="text" name="titulo" placeholder="Ingrese un título" class="form-control-plaintext bg-white" id="staticEmail" required>
                 </div>
               </div>
               <div class="mb-3 row">

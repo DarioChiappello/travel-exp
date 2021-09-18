@@ -1,33 +1,18 @@
 <?php
 require_once('session.php');
 require_once('database.php');
-require_once('userPublicaciones.php');
-if (isset($_SESSION['user'])){
-  $usuario = $_SESSION['user'];
-}
-$consulta = "SELECT `foto`
-FROM `usuarios`
-WHERE `user_name` = '$usuario'";
-$resultado = $conexion->buscar_por_sql($consulta);
-$resultado = mysqli_fetch_array($resultado);
-$_SESSION["imagen"] = $resultado["foto"];
 
 //Publicaciones
 $response = [];
 $articulos = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`
-FROM `publicaciones`
-";
+              FROM `publicaciones`";
 $articulos_exec =  $conexion->buscar_por_sql($articulos);
 $numrows = mysqli_num_rows($articulos_exec);
 
 while ($result=mysqli_fetch_array($articulos_exec)){
-    
-    
     array_push($response, $result);
 }
-        
-/*var_dump($response);
-die();*/
+      
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +31,7 @@ die();*/
           <a href="Perfil.php" class="navLinks"><?php if(isset($_SESSION['user'])){
             echo $_SESSION['user'];
           }else{
-            echo "Perfil";
+            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
           }  ?>
           </a>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>

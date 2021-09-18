@@ -3,24 +3,22 @@
    
    class Insert{
       public function comprobarPassword($pass,$pass1){
-         if ($pass == "" || $pass1 == "") {
-           header("Location:index.php");
+         if (empty(trim($pass)) || empty(trim($pass1))) {
+            die(header("Location:index.php"));
          }else{
-            $pass = trim($pass);
-            $pass1 = trim($pass1);
             if ($pass === $pass1) {
                $password = sha1($pass);
                return $password;
             }else{
-               die("Las contraseñas ingresadas no coinciden.");
+               die(header("Location:index.php"));
             }
          }
       }
 
       public function confirmarUsuario(){
          $user = $_POST["user"];
-         if ($user == "") {
-            return header("Location:index.php");
+         if (empty($user)) {
+            die(header("Location:index.php"));
          }else{
             return $user;
          } 
@@ -36,7 +34,7 @@
          $resultado = $conexion->buscar_por_sql($sql);
          $usuario = mysqli_fetch_array($resultado);
          if (isset($usuario)){
-            die("El usuario ingresado ya existe.");
+            die(header("Location:index.php"));
          }else{
             $insert ="INSERT INTO usuarios(`user_name`, `password`) 
                       VALUES('$user', '$password')";

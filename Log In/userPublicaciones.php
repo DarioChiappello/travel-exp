@@ -3,6 +3,7 @@ require_once("session.php");
 require_once("database.php");
 
 $user = $_SESSION['user'];
+
 function recuperarId($u){
     global $conexion;
     $sql = "SELECT `user_id`

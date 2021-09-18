@@ -6,7 +6,6 @@ $id_publicacion = $_POST['publicacion'];
 eliminarPublicacion($id_publicacion);
 
 function eliminarPublicacion($id){
-
     global $conexion;
     
     $sql = "DELETE

@@ -1,12 +1,22 @@
 <?php
 require_once('session.php');
 require_once('database.php');
-require_once('userPublicaciones.php');
-if (isset($_SESSION['user'])){
-  $usuario = $_SESSION['user'];
+
+//Última publicación
+$sql = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`
+              FROM `publicaciones`
+              ORDER BY publicacion_id DESC
+              LIMIT 1";
+$res = $conexion->buscar_por_sql($sql);
+$result=mysqli_fetch_array($res);
+$estrellas = $result['calificacion'];
+$estrellas_str = '';
+for($i = 0; $i < $estrellas; $i++){
+  $estrellas_str .= "★";
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,16 +86,18 @@ if (isset($_SESSION['user'])){
       <div>
         <div class="container pt-4">
           <h2 class="p-2 pb-2 text-center text-white">Último Post</h2>
-          <div class="card p-3"  id="ultPost" >
+          <div class="card p-3"  id="ultPost">
             <div class="row g-0">
               <div class="col-md-2">
-                <img src="https://ichef.bbci.co.uk/news/800/cpsprodpb/D939/production/_103590655_valija-turismo.png" class="img-fluid" alt="...">
+                <img src="<?php echo "profile/".$result["foto"];?>" class="img-fluid" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <h5 class="card-title"><?php echo $result["titulo"];?></h5>
+                  <p class="card-text"><?php echo $estrellas_str;?></p>
+                  <p class="card-text"><?php echo $result["actividad"];?></p>
+                  <p class="card-text"><?php echo $result["nombre_provincia"];?></p>                 
+                  <p class="card-text"><?php echo $result["contenido"];?></p>
                 </div>
               </div>
             </div>

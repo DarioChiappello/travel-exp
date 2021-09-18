@@ -28,10 +28,7 @@ $result=mysqli_fetch_array($res);
       <nav>
           <?php if(isset($_SESSION['user'])){
             echo '<a href="Perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';
-          }else{
-            echo '<a href="Login.php" class="navLinks">Ingresar</a>';
-          }  ?>
-          
+          }?>
           <a href="../Contacto/Form.html" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
           <a href="index.php" class="navLinks">Inicio</a>

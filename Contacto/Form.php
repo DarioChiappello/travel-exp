@@ -1,16 +1,6 @@
 <?php
 require_once('../Log In/session.php');
 require_once('../Log In/database.php');
-require_once('../Log In/userPublicaciones.php');
-if (isset($_SESSION['user'])){
-  $usuario = $_SESSION['user'];
-}
-$consulta = "SELECT `foto`
-FROM `usuarios`
-WHERE `user_name` = '$usuario'";
-$resultado = $conexion->buscar_por_sql($consulta);
-$resultado = mysqli_fetch_array($resultado);
-$_SESSION["imagen"] = $resultado["foto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
