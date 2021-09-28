@@ -4,7 +4,7 @@ require_once('database.php');
 
 //Publicaciones
 $response = [];
-$articulos = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`
+$articulos = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
               FROM `publicaciones`";
 $articulos_exec =  $conexion->buscar_por_sql($articulos);
 $numrows = mysqli_num_rows($articulos_exec);
@@ -45,6 +45,14 @@ while ($result=mysqli_fetch_array($articulos_exec)){
         </nav>
       </header>
       <?php
+      
+          if(isset($_SESSION["reporte"])){
+            echo '<div class="container-flex m-4" id="ultPost">
+                      <div class="text-center text-danger">
+                        <h2>El reporte se produjo con éxito</h2>
+                      </div>
+                  </div>';               
+          }
 
           if(count($response) == 0){
             echo '<div class="container-flex m-4" id="ultPost">
@@ -56,7 +64,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   </div>
                 </div>';
           }
-
+          
 
           foreach($response as $articulo){
             $estrellas = $articulo['calificacion'];
@@ -81,10 +89,16 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   <h6>'.$articulo['nombre_provincia'].'</h6>
                 </div>
                 <div class="col-md-2 p-4">
-                  <h6>Reportar usuario</h6>
+                  <form action="reportarUsuario.php" method="post">
+                    <input type="hidden" name="user"value="'. $articulo['user_id'] .'">
+                    <input class="btn btn-danger" type="submit" value="Reportar Usuario"> 
+                  </form>
                 </div>
                 <div class="col-md-3 p-4">
-                  <h6>Reportar publicacion</h6>
+                  <form action="reportarPublicacion.php" method="post">
+                  <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
+                    <input class="btn btn-danger" type="submit" value="Reportar Publicación">
+                  </form>
                 </div>
                 <div class="col-md-3 p-4 ">
                   <img src="img/profile.png" class="rounded  img-circle" alt="...">
@@ -104,18 +118,33 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   </p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" class="form-control mb-2" value="Comentar publicacion" name="" id="">
+              <form action="publicarComentario.php" method="post">
+                <div class="row">
+                  <div class="col-md-10">
+                    <input type="text" class="form-control mb-2" placeholder="Comentar publicacion" name="comentario" required>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
+                    <input type="hidden" name="user" value="'. $_SESSION['user'] .'">
+                    <input type="submit" class="btn btn-primary" value="Enviar"></input>
+                  </div>
+                  </div>      
                 </div>
-                <div class="col-md-2">
-                  <button class="btn btn-primary">Enviar</button>
-                </div>
-              </div>     
+              </form>';
             
-            </div>';
           }
     ?>
+         <?php
+            if(isset($_SESSION['reporte'])){
+              echo "<script> 
+                      function myFunction(){
+                        setTimeout(function(){ location.reload(); }, 3000);
+                      }
+                      myFunction();
+                    </script>";
+              unset($_SESSION['reporte']);
+            }
+      ?>
       
       
       <footer id="footer">
