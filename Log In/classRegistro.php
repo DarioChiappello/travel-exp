@@ -37,7 +37,7 @@
             die(header("Location:index.php"));
          }else{
             $insert ="INSERT INTO usuarios(`user_name`, `password`) 
-                      VALUES('$user', '$password')";
+                      VALUES('$user', '$password');";
             $resultado = $conexion->buscar_por_sql($insert);
             header("Location:Perfil.php");
          }
