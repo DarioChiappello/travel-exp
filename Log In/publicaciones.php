@@ -13,7 +13,6 @@ while ($result=mysqli_fetch_array($articulos_exec)){
     array_push($response, $result);
 }
       
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,8 +101,24 @@ while ($result=mysqli_fetch_array($articulos_exec)){
               </form>
       </div>
       <?php
+        if(!empty($_POST['provincia']) || !empty($_POST['actividad']) || !empty($_POST['calificacion'])){
+          $response = [];
+          /*$articulos = 'SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
+                        FROM `publicaciones`
+                        WHERE `nombre_provincia` = "'.$_POST["provincia"].'"';*/
+          $articulos = 'SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
+                        FROM `publicaciones`
+                        WHERE `nombre_provincia` = "'.$_POST["provincia"].'"
+                        OR `actividad` = "'.$_POST["actividad"].'"
+                        OR `calificacion` = "'.$_POST["calificacion"].'"';              
+          $articulos_exec =  $conexion->buscar_por_sql($articulos);
+          $numrows = mysqli_num_rows($articulos_exec);
+
+          while ($result=mysqli_fetch_array($articulos_exec)){
+          array_push($response, $result);
+        }
+        }
         
-        //var_dump($_POST);
           if(isset($_SESSION["reporte"])){
             echo '<div class="container-flex m-4" id="ultPost">
                       <div class="text-center text-danger">
