@@ -1,15 +1,33 @@
 <?php
 require_once('session.php');
 require_once('database.php');
-require_once('userPublicaciones.php');
+require_once('usuariosPublicaciones.php');
 
-$usuario = $_SESSION["user"];
-$consulta = "SELECT `foto`
+$usuario = $_GET["id"];
+
+if(isset($_SESSION['user'])){
+  $sql = 'SELECT `user_id`
+  FROM `usuarios`
+  WHERE `user_name` = "'.$_SESSION['user'].'"';
+
+  $resultado = $conexion->buscar_por_sql($sql);
+  $resultado = mysqli_fetch_array($resultado);
+
+  if($resultado['user_id'] == $usuario){
+    header("Location:Perfil.php");
+  }
+
+  
+}
+
+
+
+$consulta = "SELECT `foto`,`user_name`
              FROM `usuarios`
-             WHERE `user_name` = '$usuario'";
+             WHERE `user_id` = '$usuario'";
 $resultado = $conexion->buscar_por_sql($consulta);
 $resultado = mysqli_fetch_array($resultado);
-$_SESSION["imagen"] = $resultado["foto"];
+$foto = $resultado["foto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,9 +43,15 @@ $_SESSION["imagen"] = $resultado["foto"];
 <body>
       <header id="header">
         <nav>
-          <a href="Perfil.php" class="navLinks"><?php if(isset($_SESSION['user'])){
-            echo $_SESSION['user'];
-          }?>
+          <a href="Perfil.php" class="navLinks">
+            <?php 
+                if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
+                  echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
+                }elseif(!isset($_SESSION['user'])){
+                  echo '<a href="Login.php" class="navLinks">Ingresar</a>';
+                }else{
+                  echo '<a href="perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
+            ?>
           </a>
           <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
           <a href="publicaciones.php" class="navLinks">Publicaciones</a>
@@ -36,42 +60,25 @@ $_SESSION["imagen"] = $resultado["foto"];
         </nav>
       </header>
       <div class="row">
-        <div class="col-md-10">
-          <h3 class="text-white mt-3 ms-4"> <strong>Bienvenido <?php echo $_SESSION["user"]; ?> </strong></h3>
+        <div >
+          <h3 class="text-white text-center mt-3 ms-4"> <strong> <?php echo $resultado["user_name"]; ?> </strong></h3>
           <?php
-            if(isset($_SESSION['error_password'])){
-              //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
-              echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <div>'.$_SESSION['error_password'].'</div></div>';
+            if ($foto) {
+              echo "<img src='img/". $foto." 'class='rounded img-circle mx-auto d-block' width='120' height='120' >";
+            }else{
+              echo '<img src="img/profile.png" class="rounded img-circle mx-auto d-block" >';
             }
           ?>
-          <form action="passChange.php" method="post">
-            <div class="col-md-3">
-              <div class="md-5 ms-4 mt-4">
-                <label for="exampleFormControlInput1" class="form-label h4 mb-4 text-white">Cambiar contraseña</label>
-              </div>
-              <div class="row">
-                <div class="col-md-10 ms-4">
-                  <input type="text" name="newpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingresar nueva contraseña">
-                </div>
-                <div class="col-md-1">
-                  <button type="submit" class="btn btn-primary text-dark ps-4 pe-4" id="botonForm">Enviar</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-2">
           
         </div>
+        
       </div>
       <div class="container-fluid">
         <h2 class="p-2 pb-2 text-white">Publicaciones</h2>
         <?php
-            if(isset($_SESSION['publicaciones'])){
+            if(isset($publicaciones)){
               //var_dump($_SESSION['publicaciones']);
-              foreach($_SESSION['publicaciones'] as $key)
+              foreach($publicaciones as $key)
               {
                 //var_dump($key['titulo']);
                 $estrellas = $key['calificacion'];
@@ -92,19 +99,7 @@ $_SESSION["imagen"] = $resultado["foto"];
                       <p class="card-text">'.$key['contenido'].'</p>
                       <p class="card-text"><small class="text-muted">'.$key['fecha'].'</small></p>
                       <p class="card-text"><small class="text-muted">'.$key['nombre_provincia'].'</small></p>
-                      <div class="row">
-                        <div class="col-md-2">
-                          <form action="editarPublicacion.php" method="POST" >
-                            <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                            <button class="btn btn-primary">Editar</button>
-                          </form>
-                        </div>
-                      <div class="col-md-2">
-                        <form action="eliminarPublicacion.php" method="POST" >
-                          <input type="hidden" name="publicacion" value="'.$key['publicacion_id'].'">
-                          <button class="btn btn-danger">Eliminar</button>
-                        </form>
-                      </div>
+                      
 
                       </div>
                     </div>
@@ -122,16 +117,6 @@ $_SESSION["imagen"] = $resultado["foto"];
         <a href="#" class="footLinks">Politíca de Cookies</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
-     <?php
-            if(isset($_SESSION['error_password'])){
-              echo "<script> 
-                      function myFunction(){
-                        setTimeout(function(){ location.reload(); }, 3000);
-                      }
-                      myFunction();
-                    </script>";
-              unset($_SESSION['error_password']);
-            }
-      ?>
+    
 </body>
 </html>

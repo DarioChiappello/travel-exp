@@ -149,7 +149,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
 
             //Comentarios
             $comentariostotal = [];
-            $comentarios = 'SELECT comentarios.`contenido`, usuarios.`user_name`, usuarios.`foto`  FROM `comentarios` 
+            $comentarios = 'SELECT comentarios.`contenido`, usuarios.`user_name`,usuarios.`user_id`, usuarios.`foto`  FROM `comentarios` 
               INNER JOIN `usuarios` ON usuarios.`user_id` = comentarios.`user_id`
              WHERE comentarios.`publicacion_id` = '.$articulo['publicacion_id'];
               $comentarios_exec =  $conexion->buscar_por_sql($comentarios);
@@ -203,9 +203,9 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                 echo '<div class="container row" >
                 <div class="col-md-1">
                   <img src="img/'.$comentario['foto'].'" class="rounded  img-circle" height="50px" alt="...">
-                  <p>'.
+                  <p><a href="perfilAjeno.php?id='.$comentario['user_id'].'">'.
                     $comentario['user_name']
-                  .'</p>
+                  .'</a></p>
                 </div>
                 <div class="col-md-10">
                   <p>'.
