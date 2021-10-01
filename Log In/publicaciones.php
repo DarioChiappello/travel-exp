@@ -203,7 +203,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                 echo '<div class="container row" >
                 <div class="col-md-1">
                   <img src="img/'.$comentario['foto'].'" class="rounded  img-circle" height="50px" alt="...">
-                  <p><a href="perfilAjeno.php?id='.$comentario['user_id'].'">'.
+                  <p><a class="text-decoration-none text-dark" href="perfilAjeno.php?id='.$comentario['user_id'].'">'.
                     $comentario['user_name']
                   .'</a></p>
                 </div>

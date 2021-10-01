@@ -5,7 +5,19 @@ require_once('usuariosPublicaciones.php');
 
 $usuario = $_GET["id"];
 
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
+
+  $sql = 'SELECT `admin_id`
+  FROM `administradores`
+  WHERE `nombre` = "'.$_SESSION['user'].'"';
+
+  $resultado = $conexion->buscar_por_sql($sql);
+  $resultado = mysqli_fetch_array($resultado);
+
+  if($resultado['admin_id'] == $usuario ){
+    header("Location:perfilAdmin.php");
+  }
+}else if(isset($_SESSION['user'])){
   $sql = 'SELECT `user_id`
   FROM `usuarios`
   WHERE `user_name` = "'.$_SESSION['user'].'"';
@@ -13,7 +25,7 @@ if(isset($_SESSION['user'])){
   $resultado = $conexion->buscar_por_sql($sql);
   $resultado = mysqli_fetch_array($resultado);
 
-  if($resultado['user_id'] == $usuario){
+  if($resultado['user_id'] == $usuario ){
     header("Location:Perfil.php");
   }
 
