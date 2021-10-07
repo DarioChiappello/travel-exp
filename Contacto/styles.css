@@ -10,6 +10,10 @@ Botones 0362D6*/
 body {
     margin: 0px 0px 0px 0px;
     background-color:#138CCE;
+    min-height: 100%;
+    height: 100%;
+    position: relative;
+  
   }
 
 /*Index*/
@@ -46,9 +50,20 @@ body {
  /*Footer*/
  #footer{
     background-color: #FFBA5C;
-    height: 2.5rem;
-    margin-top: 4%;
-    position:static;
+    min-height: 2.5rem;
+    /*margin-top: 4%;*/
+    /*position:static*/;
+    
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+    margin-top: 100%;  
+
+    /*width: 100%;
+   
+   position: fixed;
+   bottom: 0; */ 
  }
  /*Links del Footer*/
  .footLinks{
@@ -124,5 +139,4 @@ body {
    font-size: 12px;
    line-height: 1.42857;
 }
- 
  

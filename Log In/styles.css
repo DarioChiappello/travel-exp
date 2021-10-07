@@ -46,9 +46,17 @@ body {
  /*Footer*/
  #footer{
     background-color: #FFBA5C;
-    height: 2.5rem;
+    /*height: 2.5rem;
     margin-top: 4%;
-    position:static;
+    position:static;*/
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+    /*margin-top: 100%;  */
+    top: auto;
+    margin-top: 4%;
+   
  }
  /*Links del Footer*/
  .footLinks{
