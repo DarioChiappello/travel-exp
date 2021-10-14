@@ -42,25 +42,37 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link href="styles.css" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <style>
+     footer{
+        background-color: #FFBA5C;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        }
+   </style>
 </head>
 <body>
-      <header id="header">
-      <nav>
-      <?php 
-            if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
-              echo '<a href="perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
-            }elseif(!isset($_SESSION['user'])){
-              echo '<a href="Login.php" class="navLinks">Ingresar</a>';
-            }else{
-              echo '<a href="perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
-          ?>
-          <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
-          <a href="publicaciones.php" class="navLinks">Publicaciones</a>
-          <a href="index.php" class="navLinks">Inicio</a>
-          <h2  id="titulo">Travel Exp</h2>
-        </nav>  
-      </header>
-      
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#FFBA5C">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand fs-4 ms-4 me-5 fw-bold" href="index.php">Travel Exp</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-between w-100">
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="index.php">Inicio</a></li>
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="publicaciones.php">Publicaciones</a></li>
+                <a class="nav-link active fw-bold fs-4" aria-current="page" href="../Contacto/Form.php">Contacto</a>
+                <?php 
+                  if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
+                    echo '<li><a href="perfilAdmin.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">'.$_SESSION['user'].'</a></li>';
+                  }elseif(!isset($_SESSION['user'])){
+                    echo '<li><a href="Login.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">Ingresar</a></li>';
+                  }else{
+                    echo '<li><a href="perfil.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">'.$_SESSION['user'].'</a></li>';}
+                ?>       
+            </ul>
+        </div>
+      </nav>
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -92,27 +104,6 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
         }
 
         ?>
-          <!--<div class="carousel-item active">
-            <img src="https://www.entornoturistico.com/wp-content/uploads/2016/01/turismo-600x400.jpg" class="d-block w-100" alt="..." height="600px">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://ichef.bbci.co.uk/news/800/cpsprodpb/D939/production/_103590655_valija-turismo.png" class="d-block w-100" alt="..." height="600px">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://www.entornoturistico.com/wp-content/uploads/2016/03/turismo-768x260.jpg" class="d-block w-100" alt="..." height="600px">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
-            </div>
-          </div>-->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -177,9 +168,8 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
                         </div>';
                 }
         ?>
-      <footer id="footer">
+      <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Cookies</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
 </body>

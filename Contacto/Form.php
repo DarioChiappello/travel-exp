@@ -13,26 +13,36 @@ require_once('../Log In/database.php');
    <link href="styles.css" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
    <style>
-     
+     footer{
+        background-color: #FFBA5C;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        }
    </style>
 </head>
 <body>
-      <header id="header">
-      <nav>
-      <?php 
-            if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
-              echo '<a href="../Log In/perfilAdmin.php" class="navLinks">'.$_SESSION['user'].'</a>';
-            }elseif(!isset($_SESSION['user'])){
-              echo '<a href="../Log In/Login.php" class="navLinks">Ingresar</a>';
-            }else{
-              echo '<a href="../Log In/perfil.php" class="navLinks">'.$_SESSION['user'].'</a>';}
-          ?>         
-          <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
-          <a href="../Log In/publicaciones.php" class="navLinks">Publicaciones</a>
-          <a href="../Log In/index.php" class="navLinks">Inicio</a>
-          <h2  id="titulo">Travel Exp</h2>
-        </nav>  
-      </header>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#FFBA5C">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand fs-4 ms-4 me-5 fw-bold" href="index.php">Travel Exp</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-between w-100">
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="../Log In/index.php">Inicio</a></li>
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="../Log In/publicaciones.php">Publicaciones</a></li>
+                <a class="nav-link active fw-bold fs-4" aria-current="page" href="../Contacto/Form.php">Contacto</a>
+                <?php 
+                  if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
+                    echo '<li><a href="../Log In/perfilAdmin.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">'.$_SESSION['user'].'</a></li>';
+                  }elseif(!isset($_SESSION['user'])){
+                    echo '<li><a href="../Log In/Login.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">Ingresar</a></li>';
+                  }else{
+                    echo '<li><a href="../Log In/perfil.php" class="nav-link active fw-bold fs-4 me-4" aria-current="page">'.$_SESSION['user'].'</a></li>';}
+                ?>       
+            </ul>
+        </div>
+      </nav>
       <h2 class="text-white ms-4 mt-3" id="tituloForm">Comunicate con nosotros</h2>
       <form action="mail.php" method="POST">
         <div class="col-md-5 ms-4 mt-4">
@@ -65,9 +75,8 @@ require_once('../Log In/database.php');
           <input type="submit" class="btn btn-primary mt-5 ps-5 pe-5 text-dark" id="botonForm" value="Enviar"></input>
         </div>
       </form>
-      <footer id="footer">
+      <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Cookies</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
 </body>
