@@ -11,7 +11,7 @@ $res = $conexion->buscar_por_sql($sql);
 $result=mysqli_fetch_array($res);
 
 $sliders = [];
-$slider = "SELECT `foto`,`titulo`,`contenido`
+$slider = "SELECT `foto`,`titulo`,`contenido`,`noticia_id`
 FROM `noticias`
 ORDER BY noticia_id DESC
 LIMIT 3";
@@ -86,17 +86,17 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
           if($key == 0)
           {
             echo '<div class="carousel-item active">
-              <img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px">
+              <a href="noticia.php?id='.$slider['noticia_id'].'"><img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px"></a>
               <div class="carousel-caption d-none d-md-block">
-                <h5>'.$slider['titulo'].'Second slide label</h5>
+                <h5>'.$slider['titulo'].'</h5>
                 <p>'.$slider['contenido'].'</p>
               </div>
             </div>';
           }else{
             echo '<div class="carousel-item">
-            <img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px">
+            <a href="noticia.php?id='.$slider['noticia_id'].'"><img src="profile/'.$slider['foto'].'" class="d-block w-100" alt="..." height="600px"></a>
             <div class="carousel-caption d-none d-md-block">
-              <h5>'.$slider['titulo'].'Second slide label</h5>
+              <h5>'.$slider['titulo'].'</h5>
               <p>'.$slider['contenido'].'</p>
             </div>
           </div>';
