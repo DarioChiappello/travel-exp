@@ -24,15 +24,15 @@
         <div id="formRegistro">
           <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
           <div class="input-group input-group-lg p-4">
-            <input type="text" class="form-control"  placeholder="Ingresar nombre de usuario" aria-label="Usuario" aria-describedby="inputGroup-sizing-lg" name="user">
+            <input type="text" class="form-control"  placeholder="Ingresar nombre de usuario" aria-label="Usuario" aria-describedby="inputGroup-sizing-lg" name="user" required>
           </div>
           <h2 class="logInTitulos">Ingresar Contraseña</h2>
           <div class="input-group input-group-lg p-4">
-            <input type="password" class="form-control"  placeholder="Ingresar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password">
+            <input type="password" class="form-control"  placeholder="Ingresar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password" required>
           </div>
           <h2 class="logInTitulos">Confirmar Contraseña</h2>
           <div class="input-group input-group-lg p-4">
-            <input type="password" class="form-control"  placeholder="Confirmar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password1">
+            <input type="password" class="form-control"  placeholder="Confirmar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password1" required>
           </div>
           <div class="row justify-content-md-center">
             <div class="col-md-4 pt-4"> 
