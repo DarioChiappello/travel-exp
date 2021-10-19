@@ -4,8 +4,9 @@ require_once('database.php');
 
 //Publicaciones
 $response = [];
-$articulos = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
-              FROM `publicaciones`";
+$articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, usuarios.`foto`      AS            `foto_perfil`
+              FROM `publicaciones`
+              JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id`";
 $articulos_exec =  $conexion->buscar_por_sql($articulos);
 $numrows = mysqli_num_rows($articulos_exec);
 
@@ -104,16 +105,33 @@ while ($result=mysqli_fetch_array($articulos_exec)){
               </form>
       </div>
       <?php
+        //Filtrado
         if(!empty($_POST['provincia']) || !empty($_POST['actividad']) || !empty($_POST['calificacion'])){
           $response = [];
-          /*$articulos = 'SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
+          $articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, usuarios.`foto`      AS            `foto_perfil`
                         FROM `publicaciones`
-                        WHERE `nombre_provincia` = "'.$_POST["provincia"].'"';*/
-          $articulos = 'SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`, `user_id`, `publicacion_id`
-                        FROM `publicaciones`
-                        WHERE `nombre_provincia` = "'.$_POST["provincia"].'"
-                        OR `actividad` = "'.$_POST["actividad"].'"
-                        OR `calificacion` = "'.$_POST["calificacion"].'"';              
+                        JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id` WHERE";
+
+          $filtros=array("nombre_provincia" => $_POST["provincia"], "actividad" =>  $_POST["actividad"], "calificacion" =>  $_POST["calificacion"]);
+
+          foreach($filtros as $key => $value){
+            if($value == ""){
+              unset($filtros[$key]);
+            }
+          }
+
+          $contador = 0;
+          foreach ($filtros as $key => $value) {
+          $contador++;
+            if ($value != ""){
+              if ($contador == count($filtros)) {
+                $articulos .= " `$key` LIKE ('%$value%')";
+              }else{
+                $articulos .= " `$key` LIKE ('%$value%') AND ";
+              }     
+            }
+          }
+         
           $articulos_exec =  $conexion->buscar_por_sql($articulos);
           $numrows = mysqli_num_rows($articulos_exec);
 
@@ -190,7 +208,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   </form>
                 </div>
                 <div class="col-md-3 p-4 ">
-                  <img src="img/profile.png" class="rounded  img-circle" alt="...">
+                  <img src="img/'.$articulo['foto_perfil'].'" class="rounded" width="80%" heigth="80%"  img-circle" alt="...">
                 </div>
               </div>
               <div  class="container text-dark p-4">

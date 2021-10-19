@@ -36,8 +36,9 @@
          if (isset($usuario)){
             die(header("Location:index.php"));
          }else{
-            $insert ="INSERT INTO usuarios(`user_name`, `password`) 
-                      VALUES('$user', '$password');";
+            $foto = "profile.png";
+            $insert ="INSERT INTO usuarios(`user_name`, `password`, `foto`) 
+                      VALUES('$user', '$password', '$foto');";
             $resultado = $conexion->buscar_por_sql($insert);
             header("Location:Perfil.php");
          }
