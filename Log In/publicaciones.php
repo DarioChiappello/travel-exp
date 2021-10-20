@@ -4,9 +4,10 @@ require_once('database.php');
 
 //Publicaciones
 $response = [];
-$articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, usuarios.`foto`      AS            `foto_perfil`
+$articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, publicaciones.`fecha`, usuarios.`user_name`, usuarios.`foto`      AS            `foto_perfil`
               FROM `publicaciones`
-              JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id`";
+              JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id`
+              ORDER BY publicaciones.`fecha` DESC";
 $articulos_exec =  $conexion->buscar_por_sql($articulos);
 $numrows = mysqli_num_rows($articulos_exec);
 
@@ -108,7 +109,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
         //Filtrado
         if(!empty($_POST['provincia']) || !empty($_POST['actividad']) || !empty($_POST['calificacion'])){
           $response = [];
-          $articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, usuarios.`foto`      AS            `foto_perfil`
+          $articulos = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`user_id`, publicaciones.`publicacion_id`, publicaciones.`fecha`, usuarios.`user_name`, usuarios.`foto`      AS            `foto_perfil`
                         FROM `publicaciones`
                         JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id` WHERE";
 
@@ -131,7 +132,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
               }     
             }
           }
-         
+          $articulos .= " ORDER BY publicaciones.`fecha` DESC";
           $articulos_exec =  $conexion->buscar_por_sql($articulos);
           $numrows = mysqli_num_rows($articulos_exec);
 
@@ -194,22 +195,45 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   <h6>'.$estrellas_str.'</h6>
                   <h6>'.$articulo['actividad'].'</h6>
                   <h6>'.$articulo['nombre_provincia'].'</h6>
+                  <h6>'.$articulo['fecha'].'</h6>
                 </div>
-                <div class="col-md-2 p-4">
-                  <form action="reportarUsuario.php" method="post">
-                    <input type="hidden" name="user"value="'. $articulo['user_id'] .'">
-                    <input class="btn btn-danger" type="submit" value="Reportar Usuario"> 
-                  </form>
-                </div>
-                <div class="col-md-3 p-4">
-                  <form action="reportarPublicacion.php" method="post">
-                  <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
-                    <input class="btn btn-danger" type="submit" value="Reportar Publicación">
-                  </form>
-                </div>
-                <div class="col-md-3 p-4 ">
-                  <img src="img/'.$articulo['foto_perfil'].'" class="rounded" width="80%" heigth="80%"  img-circle" alt="...">
-                </div>
+                ';
+                if (isset($_SESSION["user"]) && $_SESSION["user"] != $articulo["user_name"]) {
+                  echo ' 
+                  <div class="col-md-2 p-4">
+                    <form action="reportarUsuario.php" method="post">
+                      <input type="hidden" name="user"value="'. $articulo['user_id'] .'">
+                      <input class="btn btn-danger" type="submit" value="Reportar Usuario"> 
+                    </form>
+                  </div>
+                  <div class="col-md-3 p-4">
+                    <form action="reportarPublicacion.php" method="post">
+                    <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
+                      <input class="btn btn-danger" type="submit" value="Reportar Publicación">
+                    </form>
+                  </div>';
+                }else{
+                  echo ' 
+                  <div class="col-md-2 p-4">
+                    <form action="reportarUsuario.php" method="post">
+                      <input type="hidden" name="user"value="'. $articulo['user_id'] .'">
+                      <input class="btn btn-danger" type="hidden" value="Reportar Usuario"> 
+                    </form>
+                  </div>
+                  <div class="col-md-3 p-4">
+                    <form action="reportarPublicacion.php" method="post">
+                    <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
+                      <input class="btn btn-danger" type="hidden" value="Reportar Publicación">
+                    </form>
+                  </div>';
+                }
+               echo '
+                  <div class="col-md-3 p-4 ">
+                    <img src="img/'.$articulo['foto_perfil'].'" class="rounded" width="80%" heigth="80%"  img-circle" alt="...">
+                    <p><a class="text-decoration-none text-dark" href="perfilAjeno.php?id='.$articulo['user_id'].'">'.
+                    $articulo['user_name']
+                  .'</a></p>
+                  </div>
               </div>
               <div  class="container text-dark p-4">
               '.$articulo['contenido'].'
@@ -236,8 +260,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
               </div>
               ';
               }
-              
-              
+
               if(isset($_SESSION['user'])){
                echo '
                <form action="publicarComentario.php" method="post">
@@ -271,7 +294,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
             }
       ?>
       
-      <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
+      <footer class="d-flex flex-wrap justify-content-evenly mt-3" style="background-color:#FFBA5C">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>

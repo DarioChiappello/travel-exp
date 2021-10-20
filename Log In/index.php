@@ -3,10 +3,12 @@ require_once('session.php');
 require_once('database.php');
 
 //Última publicación
-$sql = "SELECT `foto`,`titulo`,`contenido`,`actividad`,`nombre_provincia`,`calificacion`
-        FROM `publicaciones`
-        ORDER BY publicacion_id DESC
-        LIMIT 1";
+
+$sql = "SELECT publicaciones.`foto`, publicaciones.`titulo`, publicaciones.`contenido`, publicaciones.`actividad`, publicaciones.`nombre_provincia`, publicaciones.`calificacion`, publicaciones.`fecha`, usuarios.`user_name`, usuarios.`user_id`, usuarios.`foto`      AS            `foto_perfil`
+              FROM `publicaciones`
+              JOIN `usuarios` ON publicaciones.`user_id` = usuarios.`user_id`
+              ORDER BY publicacion_id DESC
+              LIMIT 1";
 $res = $conexion->buscar_por_sql($sql);
 $result=mysqli_fetch_array($res);
 
@@ -42,14 +44,7 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link href="styles.css" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   <style>
-     footer{
-        background-color: #FFBA5C;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        }
-   </style>
+
 </head>
 <body>
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#FFBA5C">
@@ -151,6 +146,9 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
                           <div class="row g-0">
                             <div class="col-md-2">
                               <img src="profile/'.$result["foto"].'" class="img-fluid" alt="...">
+                              <p><a class="text-decoration-none text-dark" href="perfilAjeno.php?id='.$result['user_id'].'">'.
+                              $result['user_name']
+                              .'</a></p>
                             </div>
                               <div class="col-md-8">
                                   <div class="card-body">
@@ -159,6 +157,7 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
                                     <p class="card-text">'.$result["actividad"].'</p>
                                     <p class="card-text">'.$result["nombre_provincia"].'</p>                 
                                     <p class="card-text">'.$result["contenido"].'</p>
+                                    <p class="card-text">'.$result["fecha"].'</p>
                                     </div>
                                   </div>
                                 </div>
@@ -168,7 +167,7 @@ while ($resultado=mysqli_fetch_array($slider_sql)){
                         </div>';
                 }
         ?>
-      <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
+      <footer class="d-flex flex-wrap justify-content-evenly mt-3" style="background-color:#FFBA5C">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>

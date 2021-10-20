@@ -10,17 +10,22 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-      <header id="header">
-        <nav>
-          <a href="LogIn.php" class="navLinks">Ingresar</a>
-          <a href="../Contacto/Form.php" class="navLinks">Contacto</a>
-          <a href="publicaciones.php" class="navLinks">Publicaciones</a>
-          <a href="index.php" class="navLinks">Inicio</a>
-          <h2  id="titulo">Travel Exp</h2>
-        </nav>
-      </header>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#FFBA5C">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand fs-4 ms-4 me-5 fw-bold" href="index.php">Travel Exp</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-between w-100">
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="index.php">Inicio</a></li>
+                <li><a class="nav-link active fw-bold fs-4" aria-current="page" href="publicaciones.php">Publicaciones</a></li>
+                <a class="nav-link active fw-bold fs-4" aria-current="page" href="../Contacto/Form.php">Contacto</a>
+                <li><a class="nav-link active fw-bold fs-4 me-4" aria-current="page" href="LogIn.php">Ingresar</a></li>
+            </ul>
+        </div>
+    </nav>
       <h2 id="logInTitulo">Registrarse</h2>
-      <form action="prueba1.php" method="POST">
+      <form class="mb-3" action="prueba1.php" method="POST">
         <div id="formRegistro">
           <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
           <div class="input-group input-group-lg p-4">
@@ -41,9 +46,8 @@
           </div>
         </div>
       </form>
-      <footer id="footer">
+      <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
         <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Cookies</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
 </body>
