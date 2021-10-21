@@ -1,5 +1,6 @@
 <?php
    require_once("database.php");
+   require_once('session.php');
    
    class Select{
       //Función general para buscar en las 3 tablas principales
@@ -11,7 +12,9 @@
          }elseif($this->buscarBloqueado() == true){
             header("Location:index.php");
          }else{
-            header("Location:registro.php");
+            $_SESSION['error_credentials'] = "Los datos ingresados no son validos";
+            
+            header("Location:Login.php");
          }
       }
 

@@ -37,6 +37,14 @@
         </div>
     </nav>
       <h2 id="logInTitulo">Iniciar Sesión</h2>
+      <?php
+            if(isset($_SESSION['error_credentials'])){
+              //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
+              echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>'.$_SESSION['error_credentials'].'</div></div>';
+            }
+          ?>
       <form action="prueba.php" method="POST">
         <div id="formLogin">
           <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
@@ -61,5 +69,16 @@
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
+     <?php
+            if(isset($_SESSION['error_credentials'])){
+              echo "<script> 
+                      function myFunction(){
+                        setTimeout(function(){ location.reload(); }, 3000);
+                      }
+                      myFunction();
+                    </script>";
+              unset($_SESSION['error_credentials']);
+            }
+      ?>
 </body>
 </html>

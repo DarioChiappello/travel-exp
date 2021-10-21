@@ -1,3 +1,6 @@
+<?php
+  require_once('session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +28,17 @@
         </div>
     </nav>
       <h2 id="logInTitulo">Registrarse</h2>
+      <?php
+            if(isset($_SESSION['error_new_user'])){
+              //echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error_password'].'</div>';
+              echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>'.$_SESSION['error_new_user'].'</div></div>';
+                
+            }
+            
+            
+          ?>
       <form class="mb-3" action="prueba1.php" method="POST">
         <div id="formRegistro">
           <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
@@ -50,5 +64,16 @@
         <a href="#" class="footLinks">Politíca de Privacidad</a>
         <a href="#" class="footLinks">Politíca de Plataforma</a>
      </footer>
+     <?php
+            if(isset($_SESSION['error_new_user'])){
+              echo "<script> 
+                      function myFunction(){
+                        setTimeout(function(){ location.reload(); }, 3000);
+                      }
+                      myFunction();
+                    </script>";
+              unset($_SESSION['error_new_user']);
+            }
+      ?>
 </body>
 </html>

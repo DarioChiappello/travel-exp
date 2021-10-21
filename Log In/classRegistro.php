@@ -1,5 +1,6 @@
 <?php
    require_once("database.php");
+   require_once('session.php');
    
    class Insert{
       public function comprobarPassword($pass,$pass1){
@@ -34,7 +35,9 @@
          $resultado = $conexion->buscar_por_sql($sql);
          $usuario = mysqli_fetch_array($resultado);
          if (isset($usuario)){
-            die(header("Location:index.php"));
+            $_SESSION['error_new_user'] = "El usuario  ya existe";
+            header("Location:Registro.php");
+            //die(header("Location:index.php"));
          }else{
             $foto = "profile.png";
             $insert ="INSERT INTO usuarios(`user_name`, `password`, `foto`) 
