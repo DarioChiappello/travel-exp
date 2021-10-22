@@ -72,8 +72,8 @@ $result=mysqli_fetch_array($res);
       </form>
       </div>     
       <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
-        <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Plataforma</a>
+        <a href="privacidad.php" class="footLinks">Politíca de Privacidad</a>
+        <a href="plataforma.php" class="footLinks">Normas de comunidad</a>
      </footer>
 </body>
 </html>

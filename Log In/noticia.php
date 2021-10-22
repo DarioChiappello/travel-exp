@@ -10,10 +10,9 @@ $articulos = "SELECT `foto`,`titulo`,`contenido`,`noticia_id`
               FROM `noticias` WHERE `noticia_id` = $id_noticia";
 $articulos_exec =  $conexion->buscar_por_sql($articulos);
 
-$noticia = mysqli_fetch_array($articulos_exec);
-
-      
+$noticia = mysqli_fetch_array($articulos_exec);    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,8 +66,6 @@ $noticia = mysqli_fetch_array($articulos_exec);
 
             </div>'
       ?>
-      
-      
          <?php
             if(isset($_SESSION['reporte'])){
               echo "<script> 
@@ -80,10 +77,9 @@ $noticia = mysqli_fetch_array($articulos_exec);
               unset($_SESSION['reporte']);
             }
       ?>
-      
       <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
-        <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Plataforma</a>
+        <a href="privacidad.php" class="footLinks">Politíca de Privacidad</a>
+        <a href="plataforma.php" class="footLinks">Normas de comunidad</a>
      </footer>
 </body>
 </html>

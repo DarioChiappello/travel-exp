@@ -1,9 +1,6 @@
 <?php
 require_once('session.php');
 require_once('database.php');
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +14,6 @@ require_once('database.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -43,17 +39,17 @@ require_once('database.php');
             </ul>
         </div>
     </nav>
-    <h2 class="text-center mt-3 mb-4 text-white "><b>Codigo de conducta</b></h2>
+    <h2 class="text-center mt-3 mb-4 text-white "><b>Normas de la comunidad</b></h2>
     <div class="container">
         <table class="table mt-3">
             <tbody>
                 <tr class="table-primary">
                     <th scope="row" class="text-center">1</th>
-                    <td class="text-justify">Se respetuoso con otros usuarios de la plataforma.</td>
+                    <td class="text-justify">Creemos que todas las personas son dignas y tienen los mismos derechos, por lo que esperamos que respeten la dignidad de los demás y no los acosen ni los degraden.</td>
                 </tr>
                 <tr class="table-primary">
                     <th scope="row" class="text-center">2</th>
-                    <td class="text-justify">Cualquier tipo de comentario de indole racista, xenofobico, sexual, entre otros queda terminantemente prohibido en el sitio.</td>
+                    <td class="text-justify">En Travel Exp, se prohíben la incitación al odio o a la violencia, las conductas predatorias, los ataques maliciosos y el contenido que promueve conductas peligrosas o perjudiciales.</td>
                 </tr>
                 <tr class="table-primary">
                     <th scope="row" class="text-center">3</th>
@@ -66,15 +62,35 @@ require_once('database.php');
                 </tr>
                 <tr class="table-primary">
                     <th scope="row" class="text-center">5</th>
-                    <td class="text-justify">Cualquier tipo de actividad ilícita será reportada a las autoridades pertinentes.
+                    <td class="text-justify">Las actividades delictivas abarcan un amplio espectro de actos punibles por la ley incluidos el robo, la agresión, la falsificación y otros comportamientos peligrosos. Para evitar que dichos comportamientos se normalicen, imiten o faciliten eliminamos el contenido que promueva o permita cualquier actividad delictiva.
+                    </td>
+                </tr>
+                <tr class="table-primary">
+                    <th scope="row" class="text-center">6</th>
+                    <td class="text-justify">La comunidad de Travel Exp se basa en la confianza. Por lo tanto, se prohíbe el contenido que pretende engañar, estafar, enviar spam o tender trampas a otros usuarios.
+                    </td>
+                </tr>
+                <tr class="table-primary">
+                    <th scope="row" class="text-center">7</th>
+                    <td class="text-justify">En Travel Exp, no se pueden vender productos. 
+                    </td>
+                </tr>
+                <tr class="table-primary">
+                    <th scope="row" class="text-center">8</th>
+                    <td class="text-justify">No permitimos la representación, promoción o comercio de armas de fuego, munición, accesorios de armas de fuego ni armas explosivas. También prohibimos las instrucciones sobre cómo fabricar dichas armas y accesorios.
+                    </td>
+                </tr>
+                <tr class="table-primary">
+                    <th scope="row" class="text-center">9</th>
+                    <td class="text-justify">No permitimos la representación, promoción ni comercio de drogas u otras sustancias controladas. El comercio de productos de tabaco y alcohol también está prohibido en la plataforma.
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <footer class="d-flex flex-wrap justify-content-evenly mt-3" style="background-color:#FFBA5C">
-        <a href="#" class="footLinks">Politíca de Privacidad</a>
-        <a href="#" class="footLinks">Politíca de Plataforma</a>
+        <a href="privacidad.php" class="footLinks">Politíca de Privacidad</a>
+        <a href="#" class="footLinks">Normas de comunidad</a>
     </footer>
 </body>
 
