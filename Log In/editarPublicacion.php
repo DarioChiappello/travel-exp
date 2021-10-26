@@ -53,13 +53,13 @@ $result=mysqli_fetch_array($res);
           </div>
           <div class="col md-4 p-4 me-5">
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Título</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-dark text-white pe-5">Título</label>
                 <div class="col-sm-10">
                   <input type="text" name="titulo" class="form-control-plaintext bg-white" id="staticEmail" value="<?php echo $result["titulo"];?>"required>
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Calificación</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-dark text-white pe-5">Calificación</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="calificacion" aria-label="Default select example" required>
                   <?php
@@ -104,7 +104,7 @@ $result=mysqli_fetch_array($res);
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Actividad</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-dark text-white pe-5">Actividad</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="actividad" aria-label="Default select example" required>
                     <?php
@@ -122,7 +122,7 @@ $result=mysqli_fetch_array($res);
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Provincia</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-dark text-white pe-5">Provincia</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="provincia" aria-label="Default select example" required>
                     <option selected value="">Elegir provincia</option>

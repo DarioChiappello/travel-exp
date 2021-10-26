@@ -229,7 +229,7 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                 }
                echo '
                   <div class="col-md-3 p-4 ">
-                    <img src="img/'.$articulo['foto_perfil'].'" class="rounded" width="80%" heigth="80%"  img-circle" alt="...">
+                    <img src="img/'.$articulo['foto_perfil'].'" class="rounded" width="100rem" heigth="100rem"  img-circle" alt="...">
                     <p><a class="text-decoration-none text-dark" href="perfilAjeno.php?id='.$articulo['user_id'].'">'.
                     $articulo['user_name']
                   .'</a></p>

@@ -36,6 +36,7 @@
             </ul>
         </div>
     </nav>
+    
       <h2 id="logInTitulo">Iniciar Sesión</h2>
       <?php
             if(isset($_SESSION['error_credentials'])){
@@ -45,30 +46,29 @@
                 <div>'.$_SESSION['error_credentials'].'</div></div>';
             }
           ?>
-      <form action="prueba.php" method="POST">
-        <div id="formLogin">
-          <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
-          <div class="input-group input-group-lg p-4">
-            <input type="text" class="form-control"  placeholder="Ingresar nombre de usuario" aria-label="Usuario" aria-describedby="inputGroup-sizing-lg" name="user" required>
-          </div>
-          <h2 class="logInTitulos">Ingresar Contraseña</h2>
-          <div class="input-group input-group-lg p-4">
-            <input type="password" class="form-control"  placeholder="Ingresar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password" required>
-          </div>
-          <div class="row justify-content-md-center">
-            <div class="col-md-4 pt-4">
-              <input type="submit" class="btn btn-primary ps-5 pe-5" value="Iniciar"></input>
+        <form class="mb-5" action="prueba.php" method="POST">
+            <div id="formLogin">
+              <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
+              <div class="input-group input-group-lg p-4">
+                <input type="text" class="form-control"  placeholder="Ingresar nombre de usuario" aria-label="Usuario" aria-describedby="inputGroup-sizing-lg" name="user" required>
+              </div>
+              <h2 class="logInTitulos">Ingresar Contraseña</h2>
+              <div class="input-group input-group-lg p-4">
+                <input type="password" class="form-control"  placeholder="Ingresar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password" required>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <input type="submit" class="btn btn-primary ps-3 pe-3 mt-4 me-4" value="Iniciar"></input>
+                  <a href="Registro.php"><input type="button" class="btn btn-primary mt-4" value="Registrarse"></input></a>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4 pt-4"> 
-              <a href="Registro.php"><input type="button" class="btn btn-primary ps-5 pe-5" value="Registrarse"></input></a>
-            </div>
-          </div>
-        </div>
       </form>
       <footer class="d-flex flex-wrap justify-content-evenly" style="background-color:#FFBA5C">
         <a href="privacidad.php" class="footLinks">Politíca de Privacidad</a>
         <a href="plataforma.php" class="footLinks">Normas de comunidad</a>
      </footer>
+
      <?php
             if(isset($_SESSION['error_credentials'])){
               echo "<script> 

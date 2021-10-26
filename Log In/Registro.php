@@ -36,10 +36,8 @@
                 <div>'.$_SESSION['error_new_user'].'</div></div>';
                 
             }
-            
-            
           ?>
-      <form class="mb-3" action="prueba1.php" method="POST">
+      <form class="mb-5" action="prueba1.php" method="POST">
         <div id="formRegistro">
           <h2 class="logInTitulos pt-4">Ingresar Usuario</h2>
           <div class="input-group input-group-lg p-4">
@@ -53,8 +51,8 @@
           <div class="input-group input-group-lg p-4">
             <input type="password" class="form-control"  placeholder="Confirmar contraseña" aria-label="Contraseña" aria-describedby="inputGroup-sizing-lg" name="password1" required>
           </div>
-          <div class="row justify-content-md-center">
-            <div class="col-md-4 pt-4"> 
+          <div class="row">
+            <div class="col text-center"> 
               <input type="submit" class="btn btn-primary ps-5 pe-5" value="Registrarse"></input>
             </div>
           </div>

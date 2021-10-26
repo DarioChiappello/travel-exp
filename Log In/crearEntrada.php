@@ -44,13 +44,13 @@ require_once('database.php');
           </div>
           <div class="col md-4 p-4 me-5">
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Título</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-white pe-5">Título</label>
                 <div class="col-sm-10">
                   <input type="text" name="titulo" placeholder="Ingrese un título" class="form-control-plaintext bg-white" id="staticEmail" required>
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Calificación</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-white pe-5">Calificación</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="calificacion" aria-label="Default select example" required>
                     <option selected value="">Elegir calificación</option>
@@ -63,7 +63,7 @@ require_once('database.php');
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Actividad</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-white pe-5">Actividad</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="actividad" aria-label="Default select example" required>
                     <option selected value="">Elegir actividad</option>
@@ -73,7 +73,7 @@ require_once('database.php');
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-dark">Provincia</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label text-white pe-5">Provincia</label>
                 <div class="col-sm-10">
                   <select class="form-select" name="provincia" aria-label="Default select example" required>
                     <option selected value="">Elegir provincia</option>
