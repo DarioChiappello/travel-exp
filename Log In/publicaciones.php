@@ -181,22 +181,15 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   array_push($comentariostotal, $result);
               }
 
-            
+            // Mostrar Publicaciones
             echo '<div class="container text-dark mt-4" style="background-color:#FFBA5C;" id="publicacionContainer">
-              <div class="row mb-3">
-                <div class="col-md-2 p-4" >
+              <div class="row mb-5">
+                <div class="col-md-2 mt-4" >
                   
-                  <img src="profile/'.$articulo['foto'].'" width="100%"  alt="">
+                  <img src="profile/'.$articulo['foto'].'" width="380rem"  alt="">
                   
                 </div>
-                <div class="col-md-2 text-dark p-4" >
-                  <h2>'.$articulo['titulo'].'</h2>
-      
-                  <h6>'.$estrellas_str.'</h6>
-                  <h6>'.$articulo['actividad'].'</h6>
-                  <h6>'.$articulo['nombre_provincia'].'</h6>
-                  <h6>'.$articulo['fecha'].'</h6>
-                </div>
+                <div class="col-md-2 p-4 text-dark"></div>
                 ';
                 if (isset($_SESSION["user"]) && $_SESSION["user"] != $articulo["user_name"]) {
                   echo ' 
@@ -214,13 +207,13 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   </div>';
                 }else{
                   echo ' 
-                  <div class="col-md-2 p-4">
+                  <div class="col-md-2">
                     <form action="reportarUsuario.php" method="post">
                       <input type="hidden" name="user"value="'. $articulo['user_id'] .'">
                       <input class="btn btn-danger" type="hidden" value="Reportar Usuario"> 
                     </form>
                   </div>
-                  <div class="col-md-3 p-4">
+                  <div class="col-md-3">
                     <form action="reportarPublicacion.php" method="post">
                     <input type="hidden" name="publicacionID" value="'. $articulo['publicacion_id'] .'">
                       <input class="btn btn-danger" type="hidden" value="Reportar Publicación">
@@ -235,7 +228,13 @@ while ($result=mysqli_fetch_array($articulos_exec)){
                   .'</a></p>
                   </div>
               </div>
+
               <div  class="container text-dark p-4">
+              <h2>'.$articulo['titulo'].'</h2>
+              <h6>'.$estrellas_str.'</h6>
+              <h6>'.$articulo['actividad'].'</h6>
+              <h6>'.$articulo['nombre_provincia'].'</h6>
+              <h6>'.$articulo['fecha'].'</h6>
               '.$articulo['contenido'].'
               </div>
               <hr>';
